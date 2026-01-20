@@ -2,7 +2,7 @@ import { ImageResponse } from '@vercel/og';
 import { kv } from '@vercel/kv';
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'nodejs',
 };
 
 const HABIT_IDS = [
