@@ -126,7 +126,7 @@ function generateWallpaperImage(habitsData, width, height) {
   
 </svg>`;
   
-  return Buffer.from(svg);
+  return Buffer.from(svg, 'utf-8');
 }
 
 async function main() {
