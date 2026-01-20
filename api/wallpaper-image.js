@@ -126,8 +126,6 @@ function generateWallpaperImage(habitsData, width, height) {
   
 </svg>`;
   
-</svg>`;
-  
   return Buffer.from(svg);
 }
 
