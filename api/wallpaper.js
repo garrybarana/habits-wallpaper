@@ -12,7 +12,11 @@ try {
 // Load cached data
 function loadCache() {
   try {
-    return CACHE_DATA;
+    if (CACHE_DATA) {
+      console.log('Cache loaded successfully, keys:', Object.keys(CACHE_DATA));
+      return CACHE_DATA;
+    }
+    console.error('CACHE_DATA is null or undefined');
   } catch (error) {
     console.error('Error loading cache:', error);
   }
@@ -21,8 +25,21 @@ function loadCache() {
 
 // Generate mobile wallpaper HTML
 function generateMobileWallpaper(cache, days = 30) {
-  if (!cache || !cache.habitStatus || !cache.habits) {
-    return generateErrorPage();
+  console.log('generateMobileWallpaper called, cache:', cache ? 'exists' : 'null');
+  
+  if (!cache) {
+    console.error('No cache data');
+    return generateErrorPage('No cache data available');
+  }
+  
+  if (!cache.habitStatus) {
+    console.error('No habitStatus in cache');
+    return generateErrorPage('No habitStatus in cache');
+  }
+  
+  if (!cache.habits) {
+    console.error('No habits in cache');
+    return generateErrorPage('No habits in cache');
   }
 
   // Get habit names
@@ -311,7 +328,7 @@ function generateHTML(habitsData) {
 </html>`;
 }
 
-function generateErrorPage() {
+function generateErrorPage(message = 'No cached data available') {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -337,7 +354,7 @@ function generateErrorPage() {
 <body>
     <div>
         <h1>⚠️</h1>
-        <p>No cached data available</p>
+        <p>${message}</p>
         <p style="font-size: 14px; margin-top: 10px;">Please run the data fetch first</p>
     </div>
 </body>
