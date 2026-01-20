@@ -363,15 +363,17 @@ function generateErrorPage(message = 'No cached data available') {
 
 module.exports = (req, res) => {
   try {
+    console.log('API called, CACHE_DATA:', CACHE_DATA ? 'loaded' : 'null');
     const days = parseInt(req.query.days) || 30;
     const cache = loadCache();
+    console.log('Cache from loadCache:', cache ? 'exists' : 'null');
     const html = generateMobileWallpaper(cache, days);
     
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=300'); // Cache for 5 minutes
     res.status(200).send(html);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send(generateErrorPage());
+    console.error('Error in API:', error);
+    res.status(500).send(generateErrorPage('Server error: ' + error.message));
   }
 };
