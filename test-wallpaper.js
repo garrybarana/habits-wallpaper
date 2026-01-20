@@ -65,13 +65,13 @@ function generateWallpaperImage(habitsData, width, height) {
   
   // Dark minimalist design optimized for iPhone 14 Pro Max
   // Lock screen safe zones: avoid top ~900px (clock area) and bottom ~400px
-  const padding = 50;
-  const startY = 950; // Start below clock
-  const headerHeight = 150;
-  const cellSize = 18;
-  const cellGap = 5;
-  const rowHeight = 75;
-  const habitNameWidth = 220;
+  const padding = 60;
+  const startY = 650; // Start below clock
+  const headerHeight = 100;
+  const cellSize = 16;
+  const cellGap = 4;
+  const rowHeight = 65;
+  const habitNameWidth = 200;
   
   // Generate minimalist dark SVG
   let svg = `<?xml version="1.0" encoding="UTF-8"?>
@@ -81,8 +81,8 @@ function generateWallpaperImage(habitsData, width, height) {
   <rect width="${width}" height="${height}" fill="#000000"/>
   
   <!-- Minimalist header (below clock safe zone) -->
-  <text x="${padding}" y="${startY}" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
-  <text x="${padding}" y="${startY + 50}" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#666666">${completionRate}% complete</text>
+  <text x="${padding}" y="${startY}" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
+  <text x="${padding}" y="${startY + 45}" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#666666">${completionRate}% complete</text>
   
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
@@ -99,7 +99,7 @@ function generateWallpaperImage(habitsData, width, height) {
     
     return `
   <!-- Habit name -->
-  <text x="${padding}" y="${y + 28}" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#ffffff">${shortName}</text>
+  <text x="${padding}" y="${y + 24}" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#ffffff">${shortName}</text>
   
   <!-- Days grid -->
   ${habit.statuses.map((day, dayIndex) => {
@@ -117,7 +117,7 @@ function generateWallpaperImage(habitsData, width, height) {
   }).join('')}
   
   <!-- Completion count -->
-  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 24}" y="${y + 28}" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#666666">${completed}</text>
+  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-family="Arial, sans-serif" font-size="15" font-weight="500" fill="#666666">${completed}</text>
     `;
   }).join('')}
   
