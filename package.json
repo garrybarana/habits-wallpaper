@@ -1,6 +1,7 @@
 {
   "name": "habitify-wallpaper",
   "version": "1.0.0",
+  "type": "module",
   "description": "Habit streak wallpaper generator",
   "main": "api/wallpaper.js",
   "scripts": {
