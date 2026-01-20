@@ -1,27 +1,40 @@
-# Vercel KV Setup Guide
+# Upstash Redis Setup Guide (Vercel KV Alternative)
 
 ## 🚀 Quick Setup
 
-### 1. Create Vercel KV Database
+### 1. Create Upstash Redis Database
 
-1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Click on **Storage** tab
-3. Click **Create Database**
-4. Select **KV (Redis)**
-5. Choose a name: `habits-cache`
-6. Select region closest to you
-7. Click **Create**
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard) → **Storage** tab
+2. Scroll to **Marketplace Database Providers**
+3. Click on **Upstash** → "Serverless DB (Redis, Vector, Queue, Search)"
+4. Click **Add Integration** or go directly to [Upstash Dashboard](https://console.upstash.com)
+5. Sign in with GitHub (or create account)
+6. Click **Create Database**
+7. Choose:
+   - Name: `habits-cache`
+   - Type: **Regional** (free tier)
+   - Region: Closest to you
+   - TLS: Enabled
+8. Click **Create**
 
 ### 2. Connect to Your Project
 
-1. In the KV database page, click **Connect Project**
-2. Select your project: `habits-wallpaper`
-3. Click **Connect**
-4. Vercel will automatically add environment variables:
-   - `KV_URL`
+**Option A: Via Vercel Integration**
+1. In Upstash dashboard, go to your database
+2. Click **Vercel Integration**
+3. Connect to your project: `habits-wallpaper`
+4. Environment variables auto-added:
    - `KV_REST_API_URL`
    - `KV_REST_API_TOKEN`
-   - `KV_REST_API_READ_ONLY_TOKEN`
+
+**Option B: Manual Setup**
+1. In Upstash database page, go to **REST API** tab
+2. Copy the credentials
+3. Go to Vercel → Your Project → **Settings** → **Environment Variables**
+4. Add:
+   - `KV_REST_API_URL` = `https://your-db.upstash.io`
+   - `KV_REST_API_TOKEN` = `your-token`
+   - `KV_REST_API_READ_ONLY_TOKEN` = `your-readonly-token`
 
 ### 3. Deploy
 
@@ -85,14 +98,14 @@ Create a shortcut that calls the update endpoint before viewing:
 4. Take Screenshot
 5. Set Wallpaper
 
-## 🎯 Benefits of Vercel KV
+## 🎯 Benefits of Upstash Redis
 
 ✅ **Persistent Storage** - Data survives between function invocations
-✅ **Fast** - Redis-based, <10ms response time
-✅ **Free Tier** - 256MB storage, 3000 commands/day
-✅ **Auto-Expiration** - Cache expires after 24 hours
+✅ **Fast** - Redis-based, <10ms response time  
+✅ **Free Tier** - 10,000 commands/day, 256MB storage
+✅ **Auto-Expiration** - Cache expires after 24 hours (configurable)
 ✅ **No Git Commits** - No need to commit JSON files
-✅ **Edge Caching** - Available at all Vercel edge locations
+✅ **Global Replication** - Available worldwide (paid tiers)
 
 ## 📊 Storage Details
 
@@ -103,8 +116,8 @@ Create a shortcut that calls the update endpoint before viewing:
 
 ### Size Estimate:
 - ~50KB per cache update
-- 3000 commands/day = ~30 cache reads + 1 update daily
-- Well within free tier limits
+- 10,000 commands/day = ~100 cache reads + 1 update daily
+- Well within free tier limits (10x more than old Vercel KV!)
 
 ## 🔄 Cache Behavior
 
@@ -128,11 +141,13 @@ curl https://habits-wallpaper.vercel.app/api/cache-info
 ```
 
 ### KV Not Connected
-1. Go to Vercel Dashboard → Storage
+1. Go to [Upstash Console](https://console.upstash.com)
 2. Select `habits-cache` database
-3. Click "Connect Project"
-4. Select your project
-5. Redeploy
+3. Go to **REST API** tab → Copy credentials
+4. Add to Vercel Environment Variables:
+   - `KV_REST_API_URL`
+   - `KV_REST_API_TOKEN`
+5. Redeploy from Vercel dashboard
 
 ## 🔗 Endpoints
 
