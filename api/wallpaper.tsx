@@ -166,8 +166,7 @@ export default async function handler(req: NextRequest) {
                           width: cellSize,
                           height: cellSize,
                           backgroundColor: bg,
-                          borderRadius: 5,
-                        }} />4,
+                          borderRadius: 4,
                           flexShrink: 0,
                         }} />
                       );
@@ -179,7 +178,8 @@ export default async function handler(req: NextRequest) {
                   </div>
                 </div>
               );
-           
+            })}
+          </div>
         </div>
       ),
       { width, height }
