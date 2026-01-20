@@ -1,6 +1,5 @@
 const https = require('https');
 const { kv } = require('@vercel/kv');
-const { createCanvas } = require('canvas');
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
 
