@@ -1,0 +1,2628 @@
+{
+  "habits": {
+    "message": "Success",
+    "data": [
+      {
+        "id": "19166B2B-9887-4615-9E0E-29B897EBADD7",
+        "name": "Eat Garlic Empty Stomach 🧄",
+        "is_archived": false,
+        "start_date": "2025-10-13T01:50:00.000Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "rep",
+          "value": 1,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "rep",
+            "value": 1,
+            "periodicity": "daily"
+          },
+          {
+            "unit_type": "rep",
+            "value": 5,
+            "periodicity": "weekly"
+          }
+        ],
+        "log_method": "manual",
+        "recurrence": "DTSTART:20251013T015000Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "7:30"
+        ],
+        "area": null,
+        "created_date": "2025-10-13T01:50:00.000Z",
+        "priority": -1.2676506002282294e+30
+      },
+      {
+        "id": "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68",
+        "name": "VSCODE 100 DAY Challenge ",
+        "is_archived": false,
+        "start_date": "2026-01-14T22:20:48.189Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "hr",
+          "value": 2,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "hr",
+            "value": 2,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "manual",
+        "recurrence": "DTSTART:20260114T222048Z\nRRULE:FREQ=DAILY",
+        "remind": [],
+        "area": {
+          "id": "8489BAF3-E465-4FE2-94AB-F64BEF07139A",
+          "name": "CAREER GROWTH ",
+          "priority": "9"
+        },
+        "created_date": "2026-01-14T22:20:48.189Z",
+        "priority": -1.2676506002282294e+30
+      },
+      {
+        "id": "26DC91FB-B45D-4C0C-96FE-E873E171CF51",
+        "name": "Daily Walk 👣",
+        "is_archived": false,
+        "start_date": "2025-10-11T03:14:45.341Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "step",
+          "value": 7000,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "step",
+            "value": 7000,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "appleHealth",
+        "recurrence": "DTSTART:20251011T031445Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "19:30"
+        ],
+        "area": null,
+        "created_date": "2025-10-11T03:14:45.341Z",
+        "priority": 0
+      },
+      {
+        "id": "30AD6D84-AC03-43EE-9935-B340BE1ABD86",
+        "name": "Daily Skin Care 🧴",
+        "is_archived": false,
+        "start_date": "2026-01-05T04:19:51.545Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "rep",
+          "value": 1,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "rep",
+            "value": 1,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "manual",
+        "recurrence": "DTSTART:20260105T041951Z\nRRULE:FREQ=DAILY",
+        "remind": [],
+        "area": null,
+        "created_date": "2026-01-05T04:19:51.545Z",
+        "priority": -1.2676506002282294e+30
+      },
+      {
+        "id": "75F72DD4-A73A-41E5-B518-A38F1C02ACA6",
+        "name": "Read 30 Mins 📚",
+        "is_archived": false,
+        "start_date": "2025-12-03T02:15:59.434Z",
+        "time_of_day": [
+          "evening"
+        ],
+        "goal": {
+          "unit_type": "min",
+          "value": 30,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "min",
+            "value": 30,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "manual",
+        "recurrence": "DTSTART:20251203T021559Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "21:0"
+        ],
+        "area": null,
+        "created_date": "2025-12-03T02:15:59.434Z",
+        "priority": 6.338253001141147e+29
+      },
+      {
+        "id": "9CB275E2-7481-4711-B695-8CA5FDF3FC69",
+        "name": "🛌 7 hours Sleep ",
+        "is_archived": false,
+        "start_date": "2025-12-23T13:49:33.000Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "hr",
+          "value": 7,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "hr",
+            "value": 7,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "appleHealth",
+        "recurrence": "DTSTART:20251223T134933Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "9:0"
+        ],
+        "area": null,
+        "created_date": "2025-12-23T13:49:33.000Z",
+        "priority": -1.2676506002282294e+30
+      },
+      {
+        "id": "B8AF262B-C7E5-4061-88A3-EABF1A090F3B",
+        "name": "Drink Water 💧 ",
+        "is_archived": false,
+        "start_date": "2025-10-11T03:12:27.768Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "L",
+          "value": 2,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "L",
+            "value": 2,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "appleHealth",
+        "recurrence": "DTSTART:20251011T031227Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "11:0",
+          "14:0",
+          "17:0",
+          "20:0",
+          "7:5"
+        ],
+        "area": null,
+        "created_date": "2025-10-11T03:12:27.768Z",
+        "priority": -1.2676506002282294e+30
+      },
+      {
+        "id": "BF97B26A-D809-401D-A280-2216A72ED94F",
+        "name": "Meditate",
+        "is_archived": false,
+        "start_date": "2025-12-14T06:03:12.178Z",
+        "time_of_day": [
+          "any_time"
+        ],
+        "goal": {
+          "unit_type": "min",
+          "value": 10,
+          "periodicity": "daily"
+        },
+        "goal_history_items": [
+          {
+            "unit_type": "min",
+            "value": 10,
+            "periodicity": "daily"
+          }
+        ],
+        "log_method": "manual",
+        "recurrence": "DTSTART:20251214T060312Z\nRRULE:FREQ=DAILY",
+        "remind": [
+          "6:30"
+        ],
+        "area": null,
+        "created_date": "2025-12-14T06:03:12.178Z",
+        "priority": -1.2676506002282294e+30
+      }
+    ],
+    "version": "v1.2",
+    "status": true,
+    "errors": []
+  },
+  "habitLogs": {},
+  "habitStatus": {
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "completed",
+      "progress": {
+        "current_value": 12,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 2,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "completed",
+      "progress": {
+        "current_value": 16.641666666666666,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.45,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "completed",
+      "progress": {
+        "current_value": 10.358333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 3.5166666666666666,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.65,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "completed",
+      "progress": {
+        "current_value": 7204,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "completed",
+      "progress": {
+        "current_value": 7231,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "completed",
+      "progress": {
+        "current_value": 7258,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "completed",
+      "progress": {
+        "current_value": 7814,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "completed",
+      "progress": {
+        "current_value": 8032,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "completed",
+      "progress": {
+        "current_value": 7042,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 12.681097799447974,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-14": {
+      "date": "2026-01-14",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-14T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-15": {
+      "date": "2026-01-15",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-15T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-16": {
+      "date": "2026-01-16",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-16T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-17": {
+      "date": "2026-01-17",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-17T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-18": {
+      "date": "2026-01-18",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-18T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-19": {
+      "date": "2026-01-19",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-19T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-20": {
+      "date": "2026-01-20",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-20T00:00:00.000Z"
+      }
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "none"
+    },
+    "1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "none"
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-22T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "19166B2B-9887-4615-9E0E-29B897EBADD7_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-22T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "completed",
+      "progress": {
+        "current_value": 10,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "BF97B26A-D809-401D-A280-2216A72ED94F_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 10,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "none"
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "completed",
+      "progress": {
+        "current_value": 10.725,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "completed",
+      "progress": {
+        "current_value": 11.35,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.375,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 5.45,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "completed",
+      "progress": {
+        "current_value": 11.766666666666667,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "completed",
+      "progress": {
+        "current_value": 15.258333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.408333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 6.258333333333334,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "completed",
+      "progress": {
+        "current_value": 12.916666666666666,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "completed",
+      "progress": {
+        "current_value": 20.966666666666665,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "completed",
+      "progress": {
+        "current_value": 11.458333333333334,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.083333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 5.816666666666666,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 6.083333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 4.983333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 4.641666666666667,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "completed",
+      "progress": {
+        "current_value": 8.05,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 3.566666666666667,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 5.675,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "completed",
+      "progress": {
+        "current_value": 7.958333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 5.233333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "9CB275E2-7481-4711-B695-8CA5FDF3FC69_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "completed",
+      "progress": {
+        "current_value": 9.608333333333333,
+        "target_value": 7,
+        "unit_type": "hr",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "completed",
+      "progress": {
+        "current_value": 10398,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-22T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "completed",
+      "progress": {
+        "current_value": 8385,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "completed",
+      "progress": {
+        "current_value": 9532,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "completed",
+      "progress": {
+        "current_value": 12180,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "completed",
+      "progress": {
+        "current_value": 9531,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "completed",
+      "progress": {
+        "current_value": 8395,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "completed",
+      "progress": {
+        "current_value": 8151,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "completed",
+      "progress": {
+        "current_value": 7165,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "completed",
+      "progress": {
+        "current_value": 8486,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "completed",
+      "progress": {
+        "current_value": 7298,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "completed",
+      "progress": {
+        "current_value": 7049,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "completed",
+      "progress": {
+        "current_value": 7746,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "completed",
+      "progress": {
+        "current_value": 12726,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "completed",
+      "progress": {
+        "current_value": 14756,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "completed",
+      "progress": {
+        "current_value": 9112,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "completed",
+      "progress": {
+        "current_value": 7404,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "completed",
+      "progress": {
+        "current_value": 10394,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "completed",
+      "progress": {
+        "current_value": 7539.433632409413,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "completed",
+      "progress": {
+        "current_value": 7643,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "completed",
+      "progress": {
+        "current_value": 7755,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "completed",
+      "progress": {
+        "current_value": 8299,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "completed",
+      "progress": {
+        "current_value": 7701,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "26DC91FB-B45D-4C0C-96FE-E873E171CF51_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "completed",
+      "progress": {
+        "current_value": 8042,
+        "target_value": 7000,
+        "unit_type": "step",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-22T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "completed",
+      "progress": {
+        "current_value": 30,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "75F72DD4-A73A-41E5-B518-A38F1C02ACA6_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 30,
+        "unit_type": "min",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "none"
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "completed",
+      "progress": {
+        "current_value": 1,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "30AD6D84-AC03-43EE-9935-B340BE1ABD86_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "in_progress",
+      "progress": {
+        "current_value": 0,
+        "target_value": 1,
+        "unit_type": "rep",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-22": {
+      "date": "2025-12-22",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-22T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-23": {
+      "date": "2025-12-23",
+      "status": "completed",
+      "progress": {
+        "current_value": 2.0999999999999996,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-23T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-24": {
+      "date": "2025-12-24",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-24T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-25": {
+      "date": "2025-12-25",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-25T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-26": {
+      "date": "2025-12-26",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-26T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-27": {
+      "date": "2025-12-27",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-27T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-28": {
+      "date": "2025-12-28",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-28T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-29": {
+      "date": "2025-12-29",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-29T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-30": {
+      "date": "2025-12-30",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-30T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2025-12-31": {
+      "date": "2025-12-31",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2025-12-31T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-01": {
+      "date": "2026-01-01",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-01T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-02": {
+      "date": "2026-01-02",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-02T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-03": {
+      "date": "2026-01-03",
+      "status": "completed",
+      "progress": {
+        "current_value": 2.0999999999999996,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-03T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-04": {
+      "date": "2026-01-04",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-04T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-05": {
+      "date": "2026-01-05",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-05T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-06": {
+      "date": "2026-01-06",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-06T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-07": {
+      "date": "2026-01-07",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-07T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-08": {
+      "date": "2026-01-08",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-08T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-09": {
+      "date": "2026-01-09",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-09T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-10": {
+      "date": "2026-01-10",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-10T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-11": {
+      "date": "2026-01-11",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-11T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-12": {
+      "date": "2026-01-12",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-12T00:00:00.000Z"
+      }
+    },
+    "B8AF262B-C7E5-4061-88A3-EABF1A090F3B_2026-01-13": {
+      "date": "2026-01-13",
+      "status": "completed",
+      "progress": {
+        "current_value": 2,
+        "target_value": 2,
+        "unit_type": "L",
+        "periodicity": "daily",
+        "reference_date": "2026-01-13T00:00:00.000Z"
+      }
+    }
+  }
+}

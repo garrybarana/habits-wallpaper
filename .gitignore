@@ -1,5 +1,6 @@
-# Don't commit sensitive data
+# Don't commit sensitive data (but allow api/habitify-cache.json for deployment)
 habitify-cache.json
+!api/habitify-cache.json
 
 # Node modules
 node_modules/
