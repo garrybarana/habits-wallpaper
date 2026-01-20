@@ -2,6 +2,8 @@
 
 Transform your Habitify habit tracking data into a beautiful mobile wallpaper!
 
+🚀 **Live**: https://habits-wallpaper.vercel.app
+
 ## 🚀 Quick Start
 
 ### 1. Fetch Your Habit Data
