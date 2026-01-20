@@ -51,7 +51,6 @@ async function getHabitStatus(habitId, targetDate) {
 }
 
 function generateSVG(habitsData, width, height) {
-  // Calculate metrics
   const completedTotal = habitsData.reduce((sum, habit) => 
     sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
   const totalDays = habitsData.reduce((sum, habit) => sum + habit.statuses.length, 0);
@@ -59,7 +58,6 @@ function generateSVG(habitsData, width, height) {
   
   const daysToShow = habitsData[0]?.statuses.length || 30;
   
-  // Layout config
   const padding = 60;
   const startY = 650;
   const headerHeight = 100;
@@ -68,15 +66,12 @@ function generateSVG(habitsData, width, height) {
   const rowHeight = 65;
   const habitNameWidth = 200;
   
-  // Generate SVG
   let svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <rect width="${width}" height="${height}" fill="#000000"/>
   
-  <!-- Header -->
   <text x="${padding}" y="${startY}" font-size="40" font-weight="700" fill="#ffffff" font-family="Arial, sans-serif">Habits</text>
   <text x="${padding}" y="${startY + 45}" font-size="18" font-weight="500" fill="#666666" font-family="Arial, sans-serif">${completionRate}% complete</text>
-  
-  <!-- Habits -->`;
+  `;
 
   habitsData.forEach((habit, habitIndex) => {
     const y = startY + headerHeight + habitIndex * rowHeight;
@@ -106,7 +101,6 @@ function generateSVG(habitsData, width, height) {
   
   svg += `
   
-  <!-- Footer -->
   <text x="${padding}" y="${height - 450}" font-size="14" font-weight="400" fill="#333333" font-family="Arial, sans-serif">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
 </svg>`;
   
@@ -166,225 +160,6 @@ export default async function handler(req) {
         'Cache-Control': 'no-cache, no-store, must-revalidate',
       },
     });
-  } catch (error) {
-    console.error('Error generating wallpaper:', error);
-    return new Response('Error generating wallpaper: ' + error.message, { status: 500 });
-  }
-}
-  // Calculate metrics
-  const completedTotal = habitsData.reduce((sum, habit) => 
-    sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
-  const totalDays = habitsData.reduce((sum, habit) => sum + habit.statuses.length, 0);
-  const completionRate = totalDays > 0 ? ((completedTotal / totalDays) * 100).toFixed(0) : 0;
-  
-  const daysToShow = habitsData[0]?.statuses.length || 30;
-  
-  // Layout config - iPhone lock screen safe zones
-  const padding = 60;
-  const startY = 650; // Below clock area
-  const headerHeight = 100;
-  const cellSize = 16;
-  const cellGap = 4;
-  const rowHeight = 65;
-  const habitNameWidth = 200;
-  
-  return (
-    <div
-      style={{
-        width: width,
-        height: height,
-        backgroundColor: '#000000',
-        display: 'flex',
-        position: 'relative',
-      }}
-    >
-      {/* Header Section */}
-      <div
-        style={{
-          position: 'absolute',
-          left: padding,
-          top: startY,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <div
-          style={{
-            fontSize: 40,
-            fontWeight: 700,
-            color: '#ffffff',
-          }}
-        >
-          Habits
-        </div>
-        <div
-          style={{
-            fontSize: 18,
-            fontWeight: 500,
-            color: '#666666',
-            marginTop: 10,
-          }}
-        >
-          {completionRate}% complete
-        </div>
-      </div>
-
-      {/* Habits Rows */}
-      {habitsData.map((habit, habitIndex) => {
-        const y = startY + headerHeight + habitIndex * rowHeight;
-        const completed = habit.statuses.filter(s => s.status === 'completed').length;
-        const habitName = HABIT_NAMES[habit.id] || 'Unknown';
-        const x = padding + habitNameWidth;
-
-        return (
-          <div
-            key={habit.id}
-            style={{
-              position: 'absolute',
-              left: padding,
-              top: y,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}
-          >
-            {/* Habit Name */}
-            <div
-              style={{
-                width: habitNameWidth,
-                fontSize: 16,
-                fontWeight: 500,
-                color: '#ffffff',
-              }}
-            >
-              {habitName}
-            </div>
-
-            {/* Day Dots Container */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              {habit.statuses.map((day, dayIndex) => {
-                let dotColor = '#1a1a1a'; // Default dark
-                
-                if (day.status === 'completed') {
-                  dotColor = '#ffffff'; // White for completed
-                } else if (day.status === 'in_progress') {
-                  dotColor = '#666666'; // Gray for in progress
-                }
-
-                return (
-                  <div
-                    key={dayIndex}
-                    style={{
-                      width: cellSize,
-                      height: cellSize,
-                      borderRadius: 5,
-                      backgroundColor: dotColor,
-                      marginLeft: dayIndex === 0 ? 0 : cellGap,
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Completion Count */}
-            <div
-              style={{
-                marginLeft: 20,
-                fontSize: 15,
-                fontWeight: 500,
-                color: '#666666',
-              }}
-            >
-              {completed}
-            </div>
-          </div>
-        );
-      })}
-
-      {/* Footer Timestamp */}
-      <div
-        style={{
-          position: 'absolute',
-          left: padding,
-          bottom: 450,
-          fontSize: 14,
-          fontWeight: 400,
-          color: '#333333',
-        }}
-      >
-        Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-      </div>
-    </div>
-  );
-}
-
-export default async function handler(req) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const width = parseInt(searchParams.get('width')) || 1284;
-    const height = parseInt(searchParams.get('height')) || 2778;
-    const days = parseInt(searchParams.get('days')) || 30;
-    
-    // Get cached data
-    const cachedHabitsData = await kv.get('habitsData');
-    const cachedHabits = await kv.get('habits');
-    
-    if (!cachedHabitsData || !cachedHabits) {
-      return new Response('No cache available. Please wait for data to sync.', { status: 503 });
-    }
-    
-    // Build habits map
-    const habitsMap = {};
-    cachedHabits.data.forEach(habit => {
-      habitsMap[habit.id] = habit.name;
-    });
-    
-    const today = new Date();
-    const todayStr = today.toISOString().split('T')[0];
-    
-    // Prepare habits data
-    const allHabitsData = [];
-    
-    for (const habitId of HABIT_IDS) {
-      const cachedHabit = cachedHabitsData.find(h => h.id === habitId);
-      let statuses = cachedHabit ? [...cachedHabit.statuses] : [];
-      
-      // Remove today's cached data and fetch fresh
-      statuses = statuses.filter(s => s.date !== todayStr);
-      
-      try {
-        const todayStatus = await getHabitStatus(habitId, today);
-        statuses.push(todayStatus);
-      } catch (error) {
-        console.error(`Failed to fetch today's status for ${habitId}`);
-      }
-      
-      // Keep only the requested number of days
-      statuses = statuses.slice(-days);
-      
-      allHabitsData.push({
-        id: habitId,
-        name: habitsMap[habitId] || 'Unknown',
-        statuses: statuses
-      });
-    }
-    
-    // Generate image using Vercel OG
-    return new ImageResponse(
-      <HabitWallpaper habitsData={allHabitsData} width={width} height={height} />,
-      {
-        width,
-        height,
-        headers: {
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-        },
-      }
-    );
   } catch (error) {
     console.error('Error generating wallpaper:', error);
     return new Response('Error generating wallpaper: ' + error.message, { status: 500 });
