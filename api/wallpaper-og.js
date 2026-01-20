@@ -3,7 +3,7 @@ import { ImageResponse } from '@vercel/og';
 import { kv } from '@vercel/kv';
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'nodejs',
 };
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
