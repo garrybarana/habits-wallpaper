@@ -55,17 +55,6 @@ async function getHabitStatus(habitId, targetDate) {
 }
 
 function generateWallpaperImage(habitsData, width, height) {
-  const canvas = createCanvas(width, height);
-  const ctx = canvas.getContext('2d');
-  
-  // Background gradient
-  const gradient = ctx.createLinearGradient(0, 0, 0, height);
-  gradient.addColorStop(0, '#0f172a');
-  gradient.addColorStop(0.3, '#1e293b');
-  gradient.addColorStop(1, '#334155');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, width, height);
-  
   // Calculate metrics
   const completedTotal = habitsData.reduce((sum, habit) => 
     sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
@@ -76,78 +65,84 @@ function generateWallpaperImage(habitsData, width, height) {
   const cellSize = Math.floor(Math.min((width - 300) / daysToShow, 35));
   const cellGap = Math.max(3, Math.floor(cellSize / 8));
   
-  // Title
-  ctx.fillStyle = '#ec4899';
-  ctx.font = 'bold 52px -apple-system, system-ui';
-  ctx.textAlign = 'center';
-  ctx.fillText('🔥 Habit Calendar', width / 2, 180);
-  
-  // Stats
-  ctx.fillStyle = '#fbbf24';
-  ctx.font = 'bold 64px -apple-system, system-ui';
-  ctx.fillText(`${completionRate}%`, width / 2 - 150, 280);
-  ctx.fillText(`${completedTotal}`, width / 2 + 150, 280);
-  
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
-  ctx.font = '600 16px -apple-system, system-ui';
-  ctx.fillText('COMPLETE', width / 2 - 150, 310);
-  ctx.fillText('DONE', width / 2 + 150, 310);
-  
-  // Habits grid
   const startY = 400;
   const rowHeight = 55;
   
-  habitsData.forEach((habit, habitIndex) => {
-    const y = startY + habitIndex * rowHeight;
-    
-    // Habit name
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
-    ctx.font = 'bold 19px -apple-system, system-ui';
-    ctx.textAlign = 'right';
-    const habitName = habit.name.length > 20 ? habit.name.substring(0, 20) + '...' : habit.name;
-    ctx.fillText(habitName, 240, y + cellSize - 8);
-    
-    // Days grid
-    habit.statuses.forEach((day, dayIndex) => {
-      const x = 260 + dayIndex * (cellSize + cellGap);
-      
-      // Draw cell
-      ctx.beginPath();
-      ctx.roundRect(x, y, cellSize, cellSize, 6);
-      
-      if (day.status === 'completed') {
-        ctx.fillStyle = '#10b981';
-        ctx.fill();
-        ctx.shadowColor = 'rgba(16, 185, 129, 0.5)';
-        ctx.shadowBlur = 20;
-      } else if (day.status === 'in_progress') {
-        ctx.fillStyle = '#fbbf24';
-        ctx.fill();
-      } else {
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-        ctx.fill();
-      }
-      ctx.shadowBlur = 0;
-    });
-    
-    // Score
-    const completed = habit.statuses.filter(s => s.status === 'completed').length;
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.font = 'bold 17px -apple-system, system-ui';
-    ctx.textAlign = 'left';
-    ctx.fillText(`${completed}/${habit.statuses.length}`, 260 + daysToShow * (cellSize + cellGap) + 20, y + cellSize - 8);
-  });
-  
-  // Footer date
   const dateStr = new Date().toLocaleDateString('en-US', { 
     weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' 
   });
-  ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
-  ctx.font = '600 18px -apple-system, system-ui';
-  ctx.textAlign = 'center';
-  ctx.fillText(dateStr, width / 2, height - 80);
   
-  return canvas.toBuffer('image/png');
+  // Generate SVG
+  let svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#a78bfa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="statGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="${width}" height="${height}" fill="url(#bgGradient)"/>
+  
+  <!-- Title -->
+  <text x="${width/2}" y="180" font-family="-apple-system, system-ui" font-size="52" font-weight="900" text-anchor="middle" fill="url(#titleGradient)">🔥 Habit Calendar</text>
+  
+  <!-- Stats -->
+  <text x="${width/2 - 150}" y="280" font-family="-apple-system, system-ui" font-size="64" font-weight="900" text-anchor="middle" fill="url(#statGradient)">${completionRate}%</text>
+  <text x="${width/2 - 150}" y="310" font-family="-apple-system, system-ui" font-size="16" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.7)">COMPLETE</text>
+  
+  <text x="${width/2 + 150}" y="280" font-family="-apple-system, system-ui" font-size="64" font-weight="900" text-anchor="middle" fill="url(#statGradient)">${completedTotal}</text>
+  <text x="${width/2 + 150}" y="310" font-family="-apple-system, system-ui" font-size="16" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.7)">DONE</text>
+  
+  <!-- Habits Grid -->
+  ${habitsData.map((habit, habitIndex) => {
+    const y = startY + habitIndex * rowHeight;
+    const habitName = habit.name.length > 20 ? habit.name.substring(0, 20) + '...' : habit.name;
+    const completed = habit.statuses.filter(s => s.status === 'completed').length;
+    
+    return `
+  <text x="240" y="${y + cellSize - 8}" font-family="-apple-system, system-ui" font-size="19" font-weight="700" text-anchor="end" fill="rgba(255,255,255,0.95)">${habitName}</text>
+  ${habit.statuses.map((day, dayIndex) => {
+    const x = 260 + dayIndex * (cellSize + cellGap);
+    let fill = 'rgba(255,255,255,0.08)';
+    let glow = '';
+    
+    if (day.status === 'completed') {
+      fill = '#10b981';
+      glow = ' filter="url(#glow)"';
+    } else if (day.status === 'in_progress') {
+      fill = '#fbbf24';
+    }
+    
+    return `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="6" fill="${fill}"${glow}/>`;
+  }).join('')}
+  <text x="${260 + daysToShow * (cellSize + cellGap) + 20}" y="${y + cellSize - 8}" font-family="-apple-system, system-ui" font-size="17" font-weight="700" fill="rgba(255,255,255,0.6)">${completed}/${habit.statuses.length}</text>
+    `;
+  }).join('')}
+  
+  <!-- Footer -->
+  <text x="${width/2}" y="${height - 80}" font-family="-apple-system, system-ui" font-size="18" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.5)">${dateStr}</text>
+</svg>`;
+  
+  return Buffer.from(svg);
 }
 
 module.exports = async (req, res) => {
@@ -196,7 +191,7 @@ module.exports = async (req, res) => {
     
     const imageBuffer = generateWallpaperImage(allHabitsData, width, height);
     
-    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Content-Type', 'image/svg+xml');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.status(200).send(imageBuffer);
   } catch (error) {
