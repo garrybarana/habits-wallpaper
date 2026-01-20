@@ -9,9 +9,10 @@
     "test-wallpaper": "node test-wallpaper.js"
   },
   "dependencies": {
-    "@vercel/kv": "^3.0.0",
     "@upstash/redis": "^1.36.1",
-    "sharp": "^0.33.0",
-    "dotenv": "^16.0.3"
+    "@vercel/kv": "^3.0.0",
+    "@vercel/og": "^0.8.6",
+    "dotenv": "^16.0.3",
+    "sharp": "^0.33.0"
   }
 }
