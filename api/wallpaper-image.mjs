@@ -1,7 +1,8 @@
 import { kv } from '@vercel/kv';
+import { ImageResponse } from '@vercel/og';
 
 export const config = {
-  runtime: 'nodejs',
+  runtime: 'edge',
 };
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
@@ -50,13 +51,11 @@ async function getHabitStatus(habitId, targetDate) {
   };
 }
 
-function generateSVG(habitsData, width, height) {
+function generateJSX(habitsData, width, height) {
   const completedTotal = habitsData.reduce((sum, habit) => 
     sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
   const totalDays = habitsData.reduce((sum, habit) => sum + habit.statuses.length, 0);
   const completionRate = totalDays > 0 ? ((completedTotal / totalDays) * 100).toFixed(0) : 0;
-  
-  const daysToShow = habitsData[0]?.statuses.length || 30;
   
   const padding = 60;
   const startY = 650;
@@ -66,61 +65,121 @@ function generateSVG(habitsData, width, height) {
   const rowHeight = 65;
   const habitNameWidth = 200;
   
-  let svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-  <rect width="${width}" height="${height}" fill="#000000"/>
-  
-  <text x="${padding}" y="${startY}" font-size="40" font-weight="700" fill="#ffffff" font-family="Arial, sans-serif">Habits</text>
-  <text x="${padding}" y="${startY + 45}" font-size="18" font-weight="500" fill="#666666" font-family="Arial, sans-serif">${completionRate}% complete</text>
-  `;
-
-  habitsData.forEach((habit, habitIndex) => {
-    const y = startY + headerHeight + habitIndex * rowHeight;
-    const completed = habit.statuses.filter(s => s.status === 'completed').length;
-    const habitName = HABIT_NAMES[habit.id] || 'Unknown';
-    
-    svg += `
-  <text x="${padding}" y="${y + 24}" font-size="16" font-weight="500" fill="#ffffff" font-family="Arial, sans-serif">${habitName}</text>`;
-    
-    habit.statuses.forEach((day, dayIndex) => {
-      const x = padding + habitNameWidth + dayIndex * (cellSize + cellGap);
-      let fill = '#1a1a1a';
+  return (
+    <div style={{
+      width: `${width}px`,
+      height: `${height}px`,
+      backgroundColor: '#000000',
+      display: 'flex',
+      position: 'relative',
+      fontFamily: 'Arial, sans-serif',
+    }}>
+      {/* Header */}
+      <div style={{
+        position: 'absolute',
+        top: `${startY}px`,
+        left: `${padding}px`,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        <div style={{ fontSize: '40px', fontWeight: '700', color: '#ffffff' }}>
+          Habits
+        </div>
+        <div style={{ fontSize: '18px', fontWeight: '500', color: '#666666', marginTop: '10px' }}>
+          {completionRate}% complete
+        </div>
+      </div>
       
-      if (day.status === 'completed') {
-        fill = '#ffffff';
-      } else if (day.status === 'in_progress') {
-        fill = '#666666';
-      }
+      {/* Habits */}
+      <div style={{
+        position: 'absolute',
+        top: `${startY + headerHeight}px`,
+        left: `${padding}px`,
+        display: 'flex',
+        flexDirection: 'column',
+      }}>
+        {habitsData.map((habit, habitIndex) => {
+          const completed = habit.statuses.filter(s => s.status === 'completed').length;
+          const habitName = HABIT_NAMES[habit.id] || 'Unknown';
+          
+          return (
+            <div key={habit.id} style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: `${rowHeight - 24}px`,
+            }}>
+              {/* Habit name */}
+              <div style={{
+                fontSize: '16px',
+                fontWeight: '500',
+                color: '#ffffff',
+                width: `${habitNameWidth}px`,
+              }}>
+                {habitName}
+              </div>
+              
+              {/* Status cells */}
+              <div style={{ display: 'flex', gap: `${cellGap}px` }}>
+                {habit.statuses.map((day, dayIndex) => {
+                  let fillColor = '#1a1a1a';
+                  if (day.status === 'completed') {
+                    fillColor = '#ffffff';
+                  } else if (day.status === 'in_progress') {
+                    fillColor = '#666666';
+                  }
+                  
+                  return (
+                    <div key={dayIndex} style={{
+                      width: `${cellSize}px`,
+                      height: `${cellSize}px`,
+                      backgroundColor: fillColor,
+                      borderRadius: '5px',
+                    }} />
+                  );
+                })}
+              </div>
+              
+              {/* Completion count */}
+              <div style={{
+                fontSize: '15px',
+                fontWeight: '500',
+                color: '#666666',
+                marginLeft: '20px',
+              }}>
+                {completed}
+              </div>
+            </div>
+          );
+        })}
+      </div>
       
-      svg += `
-  <rect x="${x}" y="${y + 10}" width="${cellSize}" height="${cellSize}" rx="5" fill="${fill}"/>`;
-    });
-    
-    svg += `
-  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-size="15" font-weight="500" fill="#666666" font-family="Arial, sans-serif">${completed}</text>`;
-  });
-  
-  svg += `
-  
-  <text x="${padding}" y="${height - 450}" font-size="14" font-weight="400" fill="#333333" font-family="Arial, sans-serif">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
-</svg>`;
-  
-  return svg;
+      {/* Timestamp */}
+      <div style={{
+        position: 'absolute',
+        bottom: '450px',
+        left: `${padding}px`,
+        fontSize: '14px',
+        fontWeight: '400',
+        color: '#333333',
+      }}>
+        Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+      </div>
+    </div>
+  );
 }
 
-export default async function handler(req, res) {
+export default async function handler(req) {
   try {
-    // Parse query parameters from Vercel serverless function
-    const url = new URL(req.url || '', `http://${req.headers.host}`);
-    const width = parseInt(url.searchParams.get('width')) || 1284;
-    const height = parseInt(url.searchParams.get('height')) || 2778;
-    const days = parseInt(url.searchParams.get('days')) || 30;
+    const { searchParams } = new URL(req.url);
+    const width = parseInt(searchParams.get('width')) || 1284;
+    const height = parseInt(searchParams.get('height')) || 2778;
+    const days = parseInt(searchParams.get('days')) || 30;
     
     const cachedHabitsData = await kv.get('habitsData');
     const cachedHabits = await kv.get('habits');
     
     if (!cachedHabitsData || !cachedHabits) {
-      res.status(503).send('No cache available. Please wait for data to sync.');
-      return;
+      return new Response('No cache available. Please wait for data to sync.', { status: 503 });
     }
     
     const habitsMap = {};
@@ -154,13 +213,14 @@ export default async function handler(req, res) {
       });
     }
     
-    const svgContent = generateSVG(allHabitsData, width, height);
+    const jsx = generateJSX(allHabitsData, width, height);
     
-    res.setHeader('Content-Type', 'image/svg+xml');
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).send(svgContent);
+    return new ImageResponse(jsx, {
+      width,
+      height,
+    });
   } catch (error) {
     console.error('Error generating wallpaper:', error);
-    res.status(500).send('Error generating wallpaper: ' + error.message);
+    return new Response('Error generating wallpaper: ' + error.message, { status: 500 });
   }
 }
