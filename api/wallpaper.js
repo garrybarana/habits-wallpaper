@@ -1,22 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
+// Hardcoded cache data (since Vercel serverless can't read files easily)
+let CACHE_DATA = null;
+try {
+  CACHE_DATA = require('./habitify-cache.json');
+} catch (e) {
+  console.error('Could not load cache:', e);
+}
+
 // Load cached data
 function loadCache() {
   try {
-    // Try to load from public folder first (Vercel deployment)
-    let cachePath = path.join(process.cwd(), 'public', 'habitify-cache.json');
-    if (fs.existsSync(cachePath)) {
-      const data = fs.readFileSync(cachePath, 'utf8');
-      return JSON.parse(data);
-    }
-    
-    // Fallback to root folder (local development)
-    cachePath = path.join(process.cwd(), 'habitify-cache.json');
-    if (fs.existsSync(cachePath)) {
-      const data = fs.readFileSync(cachePath, 'utf8');
-      return JSON.parse(data);
-    }
+    return CACHE_DATA;
   } catch (error) {
     console.error('Error loading cache:', error);
   }
