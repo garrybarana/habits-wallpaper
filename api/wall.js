@@ -81,6 +81,7 @@ function generateWallpaper(habitsData, width, height) {
             overflow: hidden;
         }
         body {
+            opacity: 0;
             background: linear-gradient(180deg, #0f172a 0%, #1e293b 30%, #334155 100%);
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
             display: flex;
@@ -192,6 +193,12 @@ function generateWallpaper(habitsData, width, height) {
     </style>
 </head>
 <body>
+    <script>
+        // Force render completion
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '1';
+        });
+    </script>
     <div class="header">
         <div class="title">🔥 Habit Calendar</div>
         <div class="stats-row">
