@@ -1,5 +1,6 @@
 const https = require('https');
 const { kv } = require('@vercel/kv');
+const sharp = require('sharp');
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
 
@@ -190,9 +191,14 @@ module.exports = async (req, res) => {
     
     const imageBuffer = generateWallpaperImage(allHabitsData, width, height);
     
-    res.setHeader('Content-Type', 'image/svg+xml');
+    // Convert SVG to PNG using sharp
+    const pngBuffer = await sharp(imageBuffer)
+      .png()
+      .toBuffer();
+    
+    res.setHeader('Content-Type', 'image/png');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).send(imageBuffer);
+    res.status(200).send(pngBuffer);
   } catch (error) {
     console.error('Error:', error);
     res.status(500).send('Error generating wallpaper');
