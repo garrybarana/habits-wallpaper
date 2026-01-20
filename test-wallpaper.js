@@ -64,12 +64,14 @@ function generateWallpaperImage(habitsData, width, height) {
   const daysToShow = habitsData[0]?.statuses.length || 30;
   
   // Dark minimalist design optimized for iPhone 14 Pro Max
+  // Lock screen safe zones: avoid top ~900px (clock area) and bottom ~400px
   const padding = 50;
-  const headerHeight = 280;
-  const cellSize = 20;
-  const cellGap = 6;
-  const rowHeight = 85;
-  const habitNameWidth = 240;
+  const startY = 950; // Start below clock
+  const headerHeight = 150;
+  const cellSize = 18;
+  const cellGap = 5;
+  const rowHeight = 75;
+  const habitNameWidth = 220;
   
   // Generate minimalist dark SVG
   let svg = `<?xml version="1.0" encoding="UTF-8"?>
@@ -78,16 +80,22 @@ function generateWallpaperImage(habitsData, width, height) {
   <!-- Dark background -->
   <rect width="${width}" height="${height}" fill="#000000"/>
   
-  <!-- Minimalist header -->
-  <text x="${padding}" y="${headerHeight - 120}" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="-2">Habits</text>
-  <text x="${padding}" y="${headerHeight - 60}" font-family="Arial, sans-serif" font-size="22" font-weight="500" fill="#666666">${completionRate}% complete · ${daysToShow} days</text>
+  <!-- Minimalist header (below clock safe zone) -->
+  <text x="${padding}" y="${startY}" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
+  <text x="${padding}" y="${startY + 50}" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#666666">${completionRate}% complete</text>
   
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
-    const y = headerHeight + habitIndex * rowHeight;
+    const y = startY + headerHeight + habitIndex * rowHeight;
     const completed = habit.statuses.filter(s => s.status === 'completed').length;
-    const habitName = habit.name.replace(/[🧄🛌👣📚🧴💧⏰]/g, '').trim();
-    const shortName = habitName.length > 30 ? habitName.substring(0, 30) + '...' : habitName;
+    // Remove all emojis and special characters, escape XML entities
+    const habitName = habit.name.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
+    const shortName = (habitName.length > 28 ? habitName.substring(0, 28) + '...' : habitName)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
     
     return `
   <!-- Habit name -->
@@ -113,8 +121,8 @@ function generateWallpaperImage(habitsData, width, height) {
     `;
   }).join('')}
   
-  <!-- Footer -->
-  <text x="${padding}" y="${height - 80}" font-family="Arial, sans-serif" font-size="15" font-weight="400" fill="#333333">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
+  <!-- Footer (above bottom safe zone) -->
+  <text x="${padding}" y="${height - 450}" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#333333">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
   
 </svg>`;
   
