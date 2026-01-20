@@ -1,5 +1,5 @@
+const fs = require('fs');
 const https = require('https');
-const { kv } = require('@vercel/kv');
 const sharp = require('sharp');
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
@@ -82,22 +82,6 @@ function generateWallpaperImage(habitsData, width, height) {
   <text x="${padding}" y="${headerHeight - 120}" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="-2">Habits</text>
   <text x="${padding}" y="${headerHeight - 60}" font-family="Arial, sans-serif" font-size="22" font-weight="500" fill="#666666">${completionRate}% complete · ${daysToShow} days</text>
   
-  <!-- Live Badge -->
-  <rect x="${width/2 - 110}" y="${containerTop + 40}" width="220" height="30" rx="15" fill="#48bb78"/>
-  <circle cx="${width/2 - 80}" cy="${containerTop + 55}" r="5" fill="white" opacity="0.9">
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
-  </circle>
-  <text x="${width/2 - 60}" y="${containerTop + 60}" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="white" text-anchor="start">SMART: Cache + Today</text>
-  
-  <!-- Title -->
-  <text x="${width/2}" y="${containerTop + 120}" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#2d3748" text-anchor="middle">Habit Streak</text>
-  
-  <!-- Completion Ring -->
-  <circle cx="${width/2}" cy="${containerTop + 230}" r="70" fill="none" stroke="#e2e8f0" stroke-width="18"/>
-  <circle cx="${width/2}" cy="${containerTop + 230}" r="70" fill="none" stroke="#48bb78" stroke-width="18" 
-    stroke-dasharray="${2 * Math.PI * 70}" 
-    stroke-dashoffset="${2 * Math.PI * 70 * (1 - completionRate / 100)}"
-  
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
     const y = headerHeight + habitIndex * rowHeight;
@@ -137,20 +121,25 @@ function generateWallpaperImage(habitsData, width, height) {
   return Buffer.from(svg);
 }
 
-module.exports = async (req, res) => {
+async function main() {
   try {
-    const width = parseInt(req.query.width) || 1284;
-    const height = parseInt(req.query.height) || 2778;
-    const days = parseInt(req.query.days) || 30;
+    console.log('📱 Generating wallpaper locally...');
     
-    const cachedHabitsData = await kv.get('habitsData');
-    const cachedHabits = await kv.get('habits');
+    const width = 1284;
+    const height = 2778;
+    const days = 30;
+    
+    // Load cached data from local file
+    console.log('📂 Loading cache from api/habitify-cache.json...');
+    const cacheData = JSON.parse(fs.readFileSync('api/habitify-cache.json', 'utf8'));
     
     let allHabitsData = [];
     
-    if (cachedHabitsData && cachedHabits) {
+    if (cacheData && cacheData.habits) {
+      console.log('✓ Cache loaded successfully');
+      
       const habitsMap = {};
-      cachedHabits.data.forEach(habit => {
+      cacheData.habits.data.forEach(habit => {
         habitsMap[habit.id] = habit.name;
       });
       
@@ -158,41 +147,60 @@ module.exports = async (req, res) => {
       const todayStr = today.toISOString().split('T')[0];
       
       for (const habitId of HABIT_IDS) {
-        const cachedHabit = cachedHabitsData.find(h => h.id === habitId);
-        let statuses = cachedHabit ? [...cachedHabit.statuses] : [];
-        statuses = statuses.filter(s => s.date !== todayStr);
+        const habitName = habitsMap[habitId] || 'Unknown';
         
-        try {
-          const todayStatus = await getHabitStatus(habitId, today);
-          statuses.push(todayStatus);
-        } catch (error) {
-          console.error(`Failed today for ${habitId}`);
-        }
+        // Use only cached data - no API calls
+        let statuses = [];
         
+        // Find all cache entries for this habit (format: habitId_date)
+        // Data is stored in cacheData.habitStatus
+        const habitStatus = cacheData.habitStatus || {};
+        const cacheKeys = Object.keys(habitStatus).filter(key => 
+          key.startsWith(habitId + '_')
+        );
+        
+        // Extract statuses from cache
+        cacheKeys.forEach(key => {
+          if (habitStatus[key] && habitStatus[key].date) {
+            statuses.push(habitStatus[key]);
+          }
+        });
+        
+        // Sort by date and take last N days
+        statuses.sort((a, b) => new Date(a.date) - new Date(b.date));
         statuses = statuses.slice(-days);
+        
+        console.log(`  ✓ Loaded ${statuses.length} days from cache for ${habitName}`);
         
         allHabitsData.push({
           id: habitId,
-          name: habitsMap[habitId] || 'Unknown',
+          name: habitName,
           statuses: statuses
         });
       }
     } else {
-      return res.status(503).send('No cache available');
+      console.log('✗ No cache found! Run: node getHabits.js');
+      process.exit(1);
     }
     
-    const imageBuffer = generateWallpaperImage(allHabitsData, width, height);
+    console.log('\n🎨 Generating SVG...');
+    const svgBuffer = generateWallpaperImage(allHabitsData, width, height);
     
-    // Convert SVG to PNG using sharp
-    const pngBuffer = await sharp(imageBuffer)
+    console.log('🖼️  Converting to PNG...');
+    const pngBuffer = await sharp(svgBuffer)
       .png()
       .toBuffer();
     
-    res.setHeader('Content-Type', 'image/png');
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).send(pngBuffer);
+    const filename = 'wallpaper-test.png';
+    fs.writeFileSync(filename, pngBuffer);
+    
+    console.log(`\n✅ Success! Wallpaper saved to: ${filename}`);
+    console.log(`📏 Size: ${width}x${height} (iPhone 14 Pro Max)`);
+    console.log(`\n💡 Open ${filename} to preview`);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).send('Error generating wallpaper');
+    console.error('❌ Error:', error.message);
+    process.exit(1);
   }
-};
+}
+
+main();

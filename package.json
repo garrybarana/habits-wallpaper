@@ -5,11 +5,13 @@
   "main": "api/wallpaper.js",
   "scripts": {
     "dev": "node generateHabitWallpaper.js",
-    "start": "node generateHabitWallpaper.js"
+    "start": "node generateHabitWallpaper.js",
+    "test-wallpaper": "node test-wallpaper.js"
   },
   "dependencies": {
     "@vercel/kv": "^3.0.0",
     "@upstash/redis": "^1.36.1",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "dotenv": "^16.0.3"
   }
 }
