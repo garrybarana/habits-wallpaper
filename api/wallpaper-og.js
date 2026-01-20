@@ -59,8 +59,8 @@ async function getHabitStatus(habitId, targetDate) {
   }
 
   const result = await response.json();
-  return {Get('habitsData');
-    const cachedHabits = await kvGsplit('T')[0],
+  return {
+    date: targetDate.toISOString().split('T')[0],
     ...result.data
   };
 }
@@ -72,8 +72,8 @@ export default async function handler(req) {
     const height = parseInt(searchParams.get('height')) || 2778;
     const days = parseInt(searchParams.get('days')) || 30;
     
-    const cachedHabitsData = await kv.get('habitsData');
-    const cachedHabits = await kv.get('habits');
+    const cachedHabitsData = await kvGet('habitsData');
+    const cachedHabits = await kvGet('habits');
     
     if (!cachedHabitsData || !cachedHabits) {
       return new Response('No cache available. Please wait for data to sync.', { status: 503 });
@@ -126,18 +126,17 @@ export default async function handler(req) {
     return new ImageResponse(
       (
         <div style={{
-          width: `${width}px`,
-          height: `${height}px`,
+          width: width + 'px',
+          height: height + 'px',
           backgroundColor: '#000000',
           display: 'flex',
           position: 'relative',
           fontFamily: 'Arial, sans-serif',
         }}>
-          {/* Header */}
           <div style={{
             position: 'absolute',
-            top: `${startY}px`,
-            left: `${padding}px`,
+            top: startY + 'px',
+            left: padding + 'px',
             display: 'flex',
             flexDirection: 'column',
           }}>
@@ -149,15 +148,14 @@ export default async function handler(req) {
             </div>
           </div>
           
-          {/* Habits */}
           <div style={{
             position: 'absolute',
-            top: `${startY + headerHeight}px`,
-            left: `${padding}px`,
+            top: (startY + headerHeight) + 'px',
+            left: padding + 'px',
             display: 'flex',
             flexDirection: 'column',
           }}>
-            {allHabitsData.map((habit, habitIndex) => {
+            {allHabitsData.map((habit) => {
               const completed = habit.statuses.filter(s => s.status === 'completed').length;
               const habitName = HABIT_NAMES[habit.id] || 'Unknown';
               
@@ -165,20 +163,18 @@ export default async function handler(req) {
                 <div key={habit.id} style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginBottom: `${rowHeight - 24}px`,
+                  marginBottom: (rowHeight - 24) + 'px',
                 }}>
-                  {/* Habit name */}
                   <div style={{
                     fontSize: '16px',
                     fontWeight: '500',
                     color: '#ffffff',
-                    width: `${habitNameWidth}px`,
+                    width: habitNameWidth + 'px',
                   }}>
                     {habitName}
                   </div>
                   
-                  {/* Status cells */}
-                  <div style={{ display: 'flex', gap: `${cellGap}px` }}>
+                  <div style={{ display: 'flex', gap: cellGap + 'px' }}>
                     {habit.statuses.map((day, dayIndex) => {
                       let fillColor = '#1a1a1a';
                       if (day.status === 'completed') {
@@ -189,8 +185,8 @@ export default async function handler(req) {
                       
                       return (
                         <div key={dayIndex} style={{
-                          width: `${cellSize}px`,
-                          height: `${cellSize}px`,
+                          width: cellSize + 'px',
+                          height: cellSize + 'px',
                           backgroundColor: fillColor,
                           borderRadius: '5px',
                         }} />
@@ -198,7 +194,6 @@ export default async function handler(req) {
                     })}
                   </div>
                   
-                  {/* Completion count */}
                   <div style={{
                     fontSize: '15px',
                     fontWeight: '500',
@@ -212,11 +207,10 @@ export default async function handler(req) {
             })}
           </div>
           
-          {/* Timestamp */}
           <div style={{
             position: 'absolute',
             bottom: '450px',
-            left: `${padding}px`,
+            left: padding + 'px',
             fontSize: '14px',
             fontWeight: '400',
             color: '#333333',
