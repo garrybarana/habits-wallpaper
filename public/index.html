@@ -3,14 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Habitify Wallpaper</title>
+    <title>Habit Streak Wallpaper</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -18,209 +13,157 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
-        
         .container {
             background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
+            border-radius: 30px;
+            padding: 40px 30px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
         }
         
         h1 {
             color: #2d3748;
             margin-bottom: 10px;
-            font-size: 2em;
+        h1 {
+            color: #2d3748;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: center;
         }
-        
         .subtitle {
             color: #718096;
+            text-align: center;
             margin-bottom: 30px;
-            font-size: 1.1em;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        h2 {
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        
-        .url-box {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
             font-size: 14px;
-            word-break: break-all;
-            border: 2px solid #e2e8f0;
-            margin: 10px 0;
         }
-        
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin: 10px 10px 10px 0;
-            transition: transform 0.2s;
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        
-        .button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .steps {
+        .option-card {
             background: #f7fafc;
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
         }
-        
-        .step {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
         }
-        
-        .step-number {
-            position: absolute;
-            left: 0;
-            top: 0;
-            background: #667eea;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
+        .option-title {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
         }
-        
-        .note {
-            background: #fff5e6;
-            border-left: 4px solid #ecc94b;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 15px;
-            font-size: 14px;
+        .option-desc {
+            color: #718096;
+            font-size: 13px;
+            line-height: 1.5;
         }
-        
-        .preview {
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-live {
+            background: #f56565;
+            color: white;
+        }
+        .badge-cached {
+            background: #48bb78;
+            color: white;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
             text-align: center;
-            margin: 20px 0;
         }
-        
-        .preview img {
-            max-width: 300px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .footer-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
         }
+        .setup-steps {
+            background: #edf2f7;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .setup-steps ol {
+            margin-left: 20px;
+            color: #4a5568;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        .setup-steps code {
+            background: #cbd5e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+        .emoji { font-size: 24px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎯 Habitify Wallpaper</h1>
-        <p class="subtitle">Set your habit streak as iPhone wallpaper</p>
+        <h1>🎯 Habit Streak</h1>
+        <div class="subtitle">Choose your wallpaper version</div>
         
-        <div class="section">
-            <h2>📱 Your Wallpaper URL</h2>
-            <div class="url-box" id="wallpaperUrl">https://your-app.vercel.app/api/wallpaper</div>
-            <a href="/api/wallpaper" target="_blank" class="button">📱 View Mobile Version</a>
-            <a href="/api/wallpaper?days=60" target="_blank" class="button">📅 60 Days</a>
-        </div>
-        
-        <div class="section">
-            <h2>🔧 Setup iOS Shortcut</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <strong>Open Shortcuts app</strong> on your iPhone
+        <div class="options">
+            <a href="/api/live" class="option-card">
+                <div class="option-title">
+                    <span class="emoji">🔴</span>
+                    Live Wallpaper
+                    <span class="badge badge-live">Real-time</span>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    Tap <strong>+</strong> to create new shortcut
+                <div class="option-desc">
+                    Fetches fresh data from Habitify on every load. Always shows latest habit status. Slower but up-to-date.
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    Add action: <strong>"Open URLs"</strong><br>
-                    <small>Paste your wallpaper URL, Show in Safari</small>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    Add action: <strong>"Wait 2 seconds"</strong><br>
-                    <small>Let the page load</small>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    Add action: <strong>"Take Screenshot"</strong><br>
-                    <small>Captures the wallpaper</small>
-                </div>
-                <div class="step">
-                    <div class="step-number">6</div>
-                    Add action: <strong>"Crop Image"</strong><br>
-                    <small>Remove status bars (optional)</small>
-                </div>
-                <div class="step">
-                    <div class="step-number">7</div>
-                    Add action: <strong>"Set Wallpaper"</strong><br>
-                    <small>Choose Lock Screen or Both. Disable "Show Preview"</small>
-                </div>
-                <div class="step">
-                    <div class="step-number">8</div>
-                    Name your shortcut: <strong>"Update Habit Wallpaper"</strong>
-                </div>
-            </div>
+            </a>
             
-            <div class="note">
-                💡 <strong>Tip:</strong> iOS can't directly set HTML as wallpaper, so we capture it as a screenshot first!
-            </div>
+            <a href="/api/wallpaper" class="option-card">
+                <div class="option-title">
+                    <span class="emoji">⚡</span>
+                    Cached Wallpaper
+                    <span class="badge badge-cached">Fast</span>
+                </div>
+                <div class="option-desc">
+                    Uses pre-fetched data for instant loading. Update manually when needed. Faster but may be outdated.
+                </div>
+            </a>
         </div>
         
-        <div class="section">
-            <h2>🚀 Deploy to Vercel</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    Install Vercel CLI: <code>npm i -g vercel</code>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    Run: <code>vercel</code> in your project folder
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    Follow prompts to deploy
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    Copy your deployment URL
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    Update the URL in iOS Shortcut
-                </div>
+        <div class="footer">
+            <div class="footer-title">📱 iOS Setup</div>
+            <div class="setup-steps">
+                <ol>
+                    <li>Open <strong>Shortcuts</strong> app</li>
+                    <li>Create new shortcut → Add <code>Open URLs</code></li>
+                    <li>Enter URL: <code>https://habits-wallpaper.vercel.app/api/live</code></li>
+                    <li>Add <code>Take Screenshot</code> action</li>
+                    <li>Add <code>Set Wallpaper</code> action</li>
+                    <li>Run shortcut to set wallpaper</li>
+                </ol>
             </div>
-        </div>
-        
-        <div class="section">
-            <h2>🔄 Auto-Update</h2>
-            <p>Set up iOS Automation to run your shortcut:</p>
-            <ul style="margin: 15px 0; padding-left: 20px;">
-                <li>Every morning at 8 AM</li>
-                <li>When you arrive at home/work</li>
-                <li>When charging overnight</li>
-            </ul>
         </div>
     </div>
 </body>
