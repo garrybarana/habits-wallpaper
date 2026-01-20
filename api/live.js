@@ -1,0 +1,421 @@
+const https = require('https');
+
+const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
+
+const HABIT_IDS = [
+  '1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68',
+  '19166B2B-9887-4615-9E0E-29B897EBADD7',
+  'BF97B26A-D809-401D-A280-2216A72ED94F',
+  '9CB275E2-7481-4711-B695-8CA5FDF3FC69',
+  '26DC91FB-B45D-4C0C-96FE-E873E171CF51',
+  '75F72DD4-A73A-41E5-B518-A38F1C02ACA6',
+  '30AD6D84-AC03-43EE-9935-B340BE1ABD86',
+  'B8AF262B-C7E5-4061-88A3-EABF1A090F3B'
+];
+
+// Helper to make HTTPS requests
+function httpsRequest(url, options) {
+  return new Promise((resolve, reject) => {
+    const req = https.request(url, options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            resolve(data);
+          }
+        } else {
+          reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+// Fetch habits from API
+async function getHabits() {
+  const data = await httpsRequest('https://api.habitify.me/habits', {
+    method: 'GET',
+    headers: { 'Authorization': API_KEY }
+  });
+  return data;
+}
+
+// Fetch status for a specific date
+async function getHabitStatus(habitId, targetDate) {
+  const formatDate = (date) => {
+    return date.toISOString().slice(0, -5) + '+00:00';
+  };
+
+  const formattedDate = formatDate(targetDate);
+  const encodedDate = encodeURIComponent(formattedDate);
+  const url = `https://api.habitify.me/status/${habitId}?target_date=${encodedDate}`;
+
+  const result = await httpsRequest(url, {
+    method: 'GET',
+    headers: { 'Authorization': API_KEY }
+  });
+
+  return {
+    date: targetDate.toISOString().split('T')[0],
+    ...result.data
+  };
+}
+
+// Fetch status for multiple days
+async function getHabitStatusForDays(habitId, days = 30) {
+  const statuses = [];
+  const today = new Date();
+
+  for (let i = days - 1; i >= 0; i--) {
+    const targetDate = new Date(today);
+    targetDate.setDate(today.getDate() - i);
+    
+    try {
+      const status = await getHabitStatus(habitId, targetDate);
+      statuses.push(status);
+    } catch (error) {
+      console.error(`Failed to get status for ${targetDate.toISOString().split('T')[0]}`);
+    }
+  }
+
+  return statuses;
+}
+
+// Generate HTML
+function generateHTML(habitsData) {
+  const completedTotal = habitsData.reduce((sum, habit) => 
+    sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
+  const totalDays = habitsData.reduce((sum, habit) => sum + habit.statuses.length, 0);
+  const completionRate = totalDays > 0 ? ((completedTotal / totalDays) * 100).toFixed(0) : 0;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🔴 LIVE Habit Streak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f56565;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .completion-ring {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            position: relative;
+        }
+        
+        .ring-bg {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                #48bb78 0% ${completionRate}%,
+                #e2e8f0 ${completionRate}% 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(72, 187, 120, 0.3);
+        }
+        
+        .ring-inner {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .percentage {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .percentage-label {
+            font-size: 11px;
+            color: #718096;
+            margin-top: -5px;
+        }
+        
+        .habits-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .habit-row {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 12px;
+        }
+        
+        .habit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .habit-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .habit-count {
+            font-size: 11px;
+            color: #718096;
+            margin-left: 10px;
+        }
+        
+        .days-strip {
+            display: flex;
+            gap: 3px;
+            overflow-x: auto;
+            padding: 2px 0;
+            scrollbar-width: none;
+        }
+        
+        .days-strip::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .day-dot {
+            min-width: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        
+        .day-dot.completed {
+            background: #48bb78;
+        }
+        
+        .day-dot.in-progress {
+            background: #ecc94b;
+        }
+        
+        .day-dot.skipped {
+            background: #cbd5e0;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .stat-label {
+            font-size: 10px;
+            color: #718096;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .timestamp {
+            text-align: center;
+            font-size: 10px;
+            color: #a0aec0;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="live-badge">
+                <div class="live-dot"></div>
+                LIVE DATA
+            </div>
+            <h1>🎯 Habit Streak</h1>
+            <div class="completion-ring">
+                <div class="ring-bg">
+                    <div class="ring-inner">
+                        <div class="percentage">${completionRate}%</div>
+                        <div class="percentage-label">Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="habits-grid">
+            ${habitsData.map(habit => {
+                const completed = habit.statuses.filter(s => s.status === 'completed').length;
+                return `
+                <div class="habit-row">
+                    <div class="habit-header">
+                        <div class="habit-name">${habit.name}</div>
+                        <div class="habit-count">${completed}/${habit.statuses.length}</div>
+                    </div>
+                    <div class="days-strip">
+                        ${habit.statuses.map(day => {
+                            const statusClass = day.status === 'completed' ? 'completed' : 
+                                              day.status === 'in_progress' ? 'in-progress' : 'skipped';
+                            return `<div class="day-dot ${statusClass}"></div>`;
+                        }).join('')}
+                    </div>
+                </div>`;
+            }).join('')}
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">${completedTotal}</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">${habitsData.length}</div>
+                <div class="stat-label">Habits</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">${habitsData[0]?.statuses.length || 0}</div>
+                <div class="stat-label">Days</div>
+            </div>
+        </div>
+        
+        <div class="timestamp">
+            🔴 Real-time • Updated: ${new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+        </div>
+    </div>
+</body>
+</html>`;
+}
+
+module.exports = async (req, res) => {
+  try {
+    const days = parseInt(req.query.days) || 30;
+    
+    console.log('Fetching LIVE data from Habitify API...');
+    
+    // Fetch habits data
+    const habitsResponse = await getHabits();
+    const habitsMap = {};
+    habitsResponse.data.forEach(habit => {
+      habitsMap[habit.id] = habit.name;
+    });
+    
+    // Fetch status for all habits
+    const allHabitsData = [];
+    for (const habitId of HABIT_IDS) {
+      const statuses = await getHabitStatusForDays(habitId, days);
+      allHabitsData.push({
+        id: habitId,
+        name: habitsMap[habitId] || 'Unknown Habit',
+        statuses: statuses
+      });
+    }
+    
+    const html = generateHTML(allHabitsData);
+    
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.status(200).send(html);
+  } catch (error) {
+    console.error('Error fetching live data:', error);
+    res.status(500).send(`
+      <html>
+        <body style="font-family: system-ui; display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-align: center;">
+          <div>
+            <h1>⚠️ Error</h1>
+            <p>Failed to fetch live data from Habitify API</p>
+            <p style="font-size: 14px; margin-top: 20px;">${error.message}</p>
+          </div>
+        </body>
+      </html>
+    `);
+  }
+};
