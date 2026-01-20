@@ -1,10 +1,23 @@
 // Wallpaper generation using @vercel/og for PNG image output
 import { ImageResponse } from '@vercel/og';
-import { kv } from '@vercel/kv';
 
 export const config = {
-  runtime: 'nodejs',
+  runtime: 'edge',
 };
+
+// Upstash Redis REST API
+const KV_REST_API_URL = process.env.KV_REST_API_URL;
+const KV_REST_API_TOKEN = process.env.KV_REST_API_TOKEN;
+
+async function kvGet(key) {
+  const response = await fetch(`${KV_REST_API_URL}/get/${key}`, {
+    headers: {
+      Authorization: `Bearer ${KV_REST_API_TOKEN}`,
+    },
+  });
+  const data = await response.json();
+  return data.result ? JSON.parse(data.result) : null;
+}
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
 
@@ -46,8 +59,8 @@ async function getHabitStatus(habitId, targetDate) {
   }
 
   const result = await response.json();
-  return {
-    date: targetDate.toISOString().split('T')[0],
+  return {Get('habitsData');
+    const cachedHabits = await kvGsplit('T')[0],
     ...result.data
   };
 }
