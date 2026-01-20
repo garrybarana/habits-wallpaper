@@ -1,18 +1,14 @@
 {
   "name": "habitify-wallpaper",
   "version": "1.0.0",
+  "description": "Habit streak wallpaper generator with Vercel KV caching",
   "type": "module",
-  "description": "Habit streak wallpaper generator",
-  "main": "api/wallpaper.js",
   "scripts": {
-    "dev": "node generateHabitWallpaper.js",
-    "start": "node generateHabitWallpaper.js",
-    "test-wallpaper": "node test-wallpaper.js"
+    "fetch": "node getHabits.js"
   },
   "dependencies": {
     "@upstash/redis": "^1.36.1",
     "@vercel/kv": "^3.0.0",
-    "@vercel/og": "^0.8.6",
     "dotenv": "^16.0.3"
   }
 }

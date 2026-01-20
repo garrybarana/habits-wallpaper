@@ -1,103 +1,99 @@
-# Habitify Wallpaper
+# Habitify Wallpaper Generator
 
-Transform your Habitify habit tracking data into a beautiful mobile wallpaper!
+Transform your Habitify habit tracking data into a beautiful, auto-updating mobile wallpaper!
 
 🚀 **Live**: https://habits-wallpaper.vercel.app
 
-## 🚀 Quick Start
+## ✨ Features
 
-### 1. Fetch Your Habit Data
-```bash
-node getHabits.js
-```
-
-### 2. Generate Wallpaper
-```bash
-node generateHabitWallpaper.js 30
-```
-
-### 3. Deploy to Vercel
-```bash
-npm install -g vercel
-vercel
-```
-
-## 📱 iOS Shortcut Setup
-
-1. **Get your Vercel URL** after deployment (e.g., `https://your-app.vercel.app`)
-
-2. **Create iOS Shortcut**:
-   - Open Shortcuts app
-   - Tap **+** → New Shortcut
-   - Add these actions in order:
-     1. **Get Contents of URL**
-        - URL: `https://your-app.vercel.app/api/wallpaper`
-     2. **Quick Look** (optional - to preview)
-     3. **Take Screenshot** or **Save to Photo Album**
-     4. **Set Wallpaper**
-   
-3. **Name it**: "Update Habit Wallpaper"
-
-4. **Add to Home Screen** or set up automation
-
-## 🔄 Automation Ideas
-
-Set up automations in iOS Shortcuts to run daily:
-- ⏰ Every morning at 8 AM
-- 🏠 When arriving home
-- 🔌 When connected to charger at night
+- 🎯 **Real-time Updates**: Fetches live data from Habitify with Vercel KV caching
+- 📱 **iPhone Optimized**: Perfect for all iPhone models (14 Pro Max tested)
+- 🎨 **Beautiful Design**: Circular progress rings and visual streak indicators
+- ⚡ **Fast**: Cached data for instant loading
+- 🔄 **Auto-refresh**: Updates automatically without manual intervention
 
 ## 📊 API Endpoints
 
-- `/api/wallpaper` - Default 30-day view
-- `/api/wallpaper?days=60` - 60-day view
-- `/api/wallpaper?days=90` - 90-day view
+| Endpoint | Description |
+|----------|-------------|
+| `/` | Homepage with setup instructions |
+| `/api/live` | Real-time data (fetches from Habitify API) |
+| `/api/wallpaper-image` | Cached wallpaper (default 30 days) |
 
-## 🎨 Features
+**Query Parameters:**
+- `?days=60` - Show 60-day view
+- `?days=90` - Show 90-day view
 
-- ✅ Works offline using cached data
-- 📱 Optimized for iPhone (iPhone 14 Pro Max tested)
-- 🎯 Shows completion percentage ring
-- 📊 Visual streak indicators per habit
-- 🔄 Auto-updates when data is refreshed
+## 📱 iOS Setup
+
+### Option 1: Direct URL (Simplest)
+1. Open Safari on iPhone
+2. Go to: `https://habits-wallpaper.vercel.app/api/wallpaper-image`
+3. Take screenshot
+4. Set as wallpaper in Settings
+
+### Option 2: iOS Shortcut (Automated)
+1. Open **Shortcuts** app
+2. Create new shortcut with these actions:
+   - **Get Contents of URL**: `https://habits-wallpaper.vercel.app/api/wallpaper-image`
+   - **Set Wallpaper**: Choose Lock Screen or Both
+3. Set up automation to run daily (e.g., 8 AM)
+
+## 🔧 Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Fetch habit data locally
+node getHabits.js
+
+# Deploy to Vercel
+vercel
+```
 
 ## 📂 Project Structure
 
 ```
 terfadf/
 ├── api/
-│   └── wallpaper.js          # Vercel serverless function
-├── habitify-cache.json        # Cached habit data
-├── getHabits.js               # Fetch habits from API
-├── generateHabitWallpaper.js  # Generate desktop wallpaper
-├── index.html                 # Landing page
-├── package.json               # Node.js config
-└── vercel.json               # Vercel config
+│   ├── live.js              # Real-time data endpoint
+│   ├── wallpaper-image.mjs  # Main wallpaper generator
+│   └── habitify-cache.json  # Cached habit data
+├── public/
+│   └── index.html           # Landing page
+├── getHabits.js             # Data fetcher
+└── vercel.json              # Vercel config
 ```
 
 ## 🔑 Environment Variables
 
-If deploying with sensitive data, add to Vercel:
-- `API_KEY` - Your Habitify API key
+Required in Vercel Dashboard:
+- `KV_REST_API_URL` - Upstash Redis URL (for caching)
+- `KV_REST_API_TOKEN` - Upstash Redis token
 
-## 📝 Notes
+## 🎨 Customization
 
-- Cache file must exist for Vercel deployment to work
-- Data updates by re-running `getHabits.js` locally, then redeploying
-- Or set up a cron job to auto-update
-
-## 🛠️ Customization
-
-Edit `api/wallpaper.js` to:
-- Change colors
-- Adjust layout
-- Add more stats
+Edit `api/wallpaper-image.mjs` to:
+- Change colors and theme
+- Adjust layout spacing
+- Modify habit display order
 - Customize for different screen sizes
 
-## 📱 iPhone Models Supported
+## 📝 How It Works
 
-- iPhone 14 Pro Max ✅
-- iPhone 14 Pro ✅
+1. Data is fetched from Habitify API
+2. Stored in Vercel KV (Upstash Redis) for 12-hour cache
+3. Wallpaper generated dynamically as PNG image
+4. Served at custom URL that updates automatically
+
+## 🚀 Deploy Your Own
+
+1. Fork this repo
+2. Set up Vercel KV in your Vercel project
+3. Add environment variables
+4. Deploy to Vercel
+5. Use your custom URL in iOS Shortcut
 - iPhone 14 ✅
 - All modern iPhones with iOS 14+
 
