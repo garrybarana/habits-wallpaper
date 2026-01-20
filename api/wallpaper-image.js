@@ -62,84 +62,109 @@ function generateWallpaperImage(habitsData, width, height) {
   const completionRate = totalDays > 0 ? ((completedTotal / totalDays) * 100).toFixed(0) : 0;
   
   const daysToShow = habitsData[0]?.statuses.length || 30;
-  const cellSize = Math.floor(Math.min((width - 300) / daysToShow, 35));
-  const cellGap = Math.max(3, Math.floor(cellSize / 8));
   
-  const startY = 400;
-  const rowHeight = 55;
+  // iPhone 14 Pro Max optimized sizing
+  const containerWidth = width - 80; // 40px padding each side
+  const containerTop = 300;
+  const dotSize = 10;
+  const dotGap = 4;
+  const rowHeight = 90;
   
-  const dateStr = new Date().toLocaleDateString('en-US', { 
-    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' 
-  });
+  const timestamp = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
   
-  // Generate SVG
+  // Generate SVG with /api/live design
   let svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
-      <stop offset="30%" style="stop-color:#1e293b;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#a78bfa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="statGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="10" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
       <feMerge>
-        <feMergeNode in="coloredBlur"/>
+        <feMergeNode/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
   </defs>
   
-  <!-- Background -->
+  <!-- Background Gradient -->
   <rect width="${width}" height="${height}" fill="url(#bgGradient)"/>
   
+  <!-- Main Container -->
+  <rect x="40" y="${containerTop}" width="${containerWidth}" height="${height - containerTop - 100}" rx="30" fill="rgba(255,255,255,0.98)" filter="url(#shadow)"/>
+  
+  <!-- Live Badge -->
+  <rect x="${width/2 - 100}" y="${containerTop + 30}" width="200" height="24" rx="12" fill="#48bb78"/>
+  <circle cx="${width/2 - 75}" cy="${containerTop + 42}" r="4" fill="white" opacity="0.8"/>
+  <text x="${width/2 - 60}" y="${containerTop + 46}" font-family="-apple-system, system-ui" font-size="13" font-weight="600" fill="white" text-anchor="start">SMART: Cache + Today</text>
+  
   <!-- Title -->
-  <text x="${width/2}" y="180" font-family="-apple-system, system-ui" font-size="52" font-weight="900" text-anchor="middle" fill="url(#titleGradient)">🔥 Habit Calendar</text>
+  <text x="${width/2}" y="${containerTop + 90}" font-family="-apple-system, system-ui" font-size="28" font-weight="700" fill="#2d3748" text-anchor="middle">🎯 Habit Streak</text>
   
-  <!-- Stats -->
-  <text x="${width/2 - 150}" y="280" font-family="-apple-system, system-ui" font-size="64" font-weight="900" text-anchor="middle" fill="url(#statGradient)">${completionRate}%</text>
-  <text x="${width/2 - 150}" y="310" font-family="-apple-system, system-ui" font-size="16" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.7)">COMPLETE</text>
-  
-  <text x="${width/2 + 150}" y="280" font-family="-apple-system, system-ui" font-size="64" font-weight="900" text-anchor="middle" fill="url(#statGradient)">${completedTotal}</text>
-  <text x="${width/2 + 150}" y="310" font-family="-apple-system, system-ui" font-size="16" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.7)">DONE</text>
+  <!-- Completion Ring -->
+  <circle cx="${width/2}" cy="${containerTop + 180}" r="60" fill="none" stroke="#e2e8f0" stroke-width="15"/>
+  <circle cx="${width/2}" cy="${containerTop + 180}" r="60" fill="none" stroke="#48bb78" stroke-width="15" 
+    stroke-dasharray="${2 * Math.PI * 60}" 
+    stroke-dashoffset="${2 * Math.PI * 60 * (1 - completionRate / 100)}"
+    transform="rotate(-90 ${width/2} ${containerTop + 180})"
+    stroke-linecap="round"/>
+  <circle cx="${width/2}" cy="${containerTop + 180}" r="45" fill="white"/>
+  <text x="${width/2}" y="${containerTop + 185}" font-family="-apple-system, system-ui" font-size="36" font-weight="700" fill="#2d3748" text-anchor="middle">${completionRate}%</text>
+  <text x="${width/2}" y="${containerTop + 205}" font-family="-apple-system, system-ui" font-size="13" fill="#718096" text-anchor="middle">Complete</text>
   
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
-    const y = startY + habitIndex * rowHeight;
-    const habitName = habit.name.length > 20 ? habit.name.substring(0, 20) + '...' : habit.name;
+    const y = containerTop + 280 + habitIndex * rowHeight;
     const completed = habit.statuses.filter(s => s.status === 'completed').length;
+    const habitName = habit.name.length > 28 ? habit.name.substring(0, 28) + '...' : habit.name;
     
     return `
-  <text x="240" y="${y + cellSize - 8}" font-family="-apple-system, system-ui" font-size="19" font-weight="700" text-anchor="end" fill="rgba(255,255,255,0.95)">${habitName}</text>
+  <!-- Habit Row Background -->
+  <rect x="60" y="${y}" width="${containerWidth - 40}" rx="12" height="70" fill="#f7fafc"/>
+  
+  <!-- Habit Name -->
+  <text x="75" y="${y + 25}" font-family="-apple-system, system-ui" font-size="15" font-weight="600" fill="#2d3748">${habitName}</text>
+  
+  <!-- Habit Count -->
+  <text x="${width - 80}" y="${y + 25}" font-family="-apple-system, system-ui" font-size="13" fill="#718096" text-anchor="end">${completed}/${habit.statuses.length}</text>
+  
+  <!-- Days Strip -->
   ${habit.statuses.map((day, dayIndex) => {
-    const x = 260 + dayIndex * (cellSize + cellGap);
-    let fill = 'rgba(255,255,255,0.08)';
-    let glow = '';
+    const x = 75 + dayIndex * (dotSize + dotGap);
+    let fill = '#cbd5e0';
     
     if (day.status === 'completed') {
-      fill = '#10b981';
-      glow = ' filter="url(#glow)"';
+      fill = '#48bb78';
     } else if (day.status === 'in_progress') {
-      fill = '#fbbf24';
+      fill = '#ecc94b';
     }
     
-    return `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="6" fill="${fill}"${glow}/>`;
+    return `<rect x="${x}" y="${y + 45}" width="${dotSize}" height="${dotSize}" rx="2" fill="${fill}"/>`;
   }).join('')}
-  <text x="${260 + daysToShow * (cellSize + cellGap) + 20}" y="${y + cellSize - 8}" font-family="-apple-system, system-ui" font-size="17" font-weight="700" fill="rgba(255,255,255,0.6)">${completed}/${habit.statuses.length}</text>
     `;
   }).join('')}
   
-  <!-- Footer -->
-  <text x="${width/2}" y="${height - 80}" font-family="-apple-system, system-ui" font-size="18" font-weight="600" text-anchor="middle" fill="rgba(255,255,255,0.5)">${dateStr}</text>
+  <!-- Stats Section -->
+  <line x1="60" x2="${width - 60}" y1="${containerTop + 280 + habitsData.length * rowHeight + 20}" y2="${containerTop + 280 + habitsData.length * rowHeight + 20}" stroke="#e2e8f0" stroke-width="1"/>
+  
+  <!-- Stats -->
+  <text x="${width/2 - 160}" y="${containerTop + 280 + habitsData.length * rowHeight + 60}" font-family="-apple-system, system-ui" font-size="24" font-weight="700" fill="#2d3748" text-anchor="middle">${completedTotal}</text>
+  <text x="${width/2 - 160}" y="${containerTop + 280 + habitsData.length * rowHeight + 80}" font-family="-apple-system, system-ui" font-size="11" fill="#718096" text-anchor="middle">COMPLETED</text>
+  
+  <text x="${width/2}" y="${containerTop + 280 + habitsData.length * rowHeight + 60}" font-family="-apple-system, system-ui" font-size="24" font-weight="700" fill="#2d3748" text-anchor="middle">${habitsData.length}</text>
+  <text x="${width/2}" y="${containerTop + 280 + habitsData.length * rowHeight + 80}" font-family="-apple-system, system-ui" font-size="11" fill="#718096" text-anchor="middle">HABITS</text>
+  
+  <text x="${width/2 + 160}" y="${containerTop + 280 + habitsData.length * rowHeight + 60}" font-family="-apple-system, system-ui" font-size="24" font-weight="700" fill="#2d3748" text-anchor="middle">${daysToShow}</text>
+  <text x="${width/2 + 160}" y="${containerTop + 280 + habitsData.length * rowHeight + 80}" font-family="-apple-system, system-ui" font-size="11" fill="#718096" text-anchor="middle">DAYS</text>
+  
+  <!-- Timestamp -->
+  <text x="${width/2}" y="${containerTop + 280 + habitsData.length * rowHeight + 120}" font-family="-apple-system, system-ui" font-size="12" fill="#a0aec0" text-anchor="middle">🚀 29 cached + today live • ${timestamp}</text>
+  
 </svg>`;
   
   return Buffer.from(svg);
