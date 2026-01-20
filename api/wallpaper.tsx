@@ -1,15 +1,18 @@
-/** @jsx h */
-/** @jsxFrag Fragment */
 import { ImageResponse } from '@vercel/og';
+import type { NextRequest } from 'next/server';
 
 export const config = {
-  runtime: 'nodejs',
+  runtime: 'edge',
 };
 
-import { kv } from '@vercel/kv';
-
+// Upstash KV REST API for Edge Runtime
 async function kvGet(key: string) {
-  return await kv.get(key);
+  const url = `${process.env.KV_REST_API_URL}/get/${key}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` },
+  });
+  const data = await res.json();
+  return data.result ? JSON.parse(data.result) : null;
 }
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
@@ -55,31 +58,31 @@ async function getHabitStatus(habitId, targetDate) {
   };
 }
 
-export default async function handler(req) {
+export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const width = parseInt(searchParams.get('width')) || 1284;
-    const height = parseInt(searchParams.get('height')) || 2778;
-    const days = parseInt(searchParams.get('days')) || 30;
+    const width = parseInt(searchParams.get('width') || '1284');
+    const height = parseInt(searchParams.get('height') || '2778');
+    const days = parseInt(searchParams.get('days') || '30');
     
-    const cachedHabitsData = await kvGet('habitsData');
-    const cachedHabits = await kvGet('habits');
+    const cachedHabitsData: any = await kvGet('habitsData');
+    const cachedHabits: any = await kvGet('habits');
     
     if (!cachedHabitsData || !cachedHabits) {
       return new Response('No cache available', { status: 503 });
     }
     
-    const habitsMap = {};
-    cachedHabits.data.forEach(h => { habitsMap[h.id] = h.name; });
+    const habitsMap: Record<string, string> = {};
+    cachedHabits.data.forEach((h: any) => { habitsMap[h.id] = h.name; });
     
     const today = new Date();
     const todayStr = today.toISOString().split('T')[0];
-    const allHabitsData = [];
+    const allHabitsData: any[] = [];
     
     for (const habitId of HABIT_IDS) {
-      const cached = cachedHabitsData.find(h => h.id === habitId);
+      const cached = cachedHabitsData.find((h: any) => h.id === habitId);
       let statuses = cached ? [...cached.statuses] : [];
-      statuses = statuses.filter(s => s.date !== todayStr);
+      statuses = statuses.filter((s: any) => s.date !== todayStr);
       
       try {
         const todayStatus = await getHabitStatus(habitId, today);
@@ -97,7 +100,7 @@ export default async function handler(req) {
     }
     
     const completed = allHabitsData.reduce((sum, h) => 
-      sum + h.statuses.filter(s => s.status === 'completed').length, 0);
+      sum + h.statuses.filter((s: any) => s.status === 'completed').length, 0);
     const total = allHabitsData.reduce((sum, h) => sum + h.statuses.length, 0);
     const rate = total > 0 ? ((completed / total) * 100).toFixed(0) : 0;
     
@@ -141,9 +144,9 @@ export default async function handler(req) {
             display: 'flex',
             flexDirection: 'column',
           }}>
-            {allHabitsData.map(habit => {
-              const count = habit.statuses.filter(s => s.status === 'completed').length;
-              const name = HABIT_NAMES[habit.id] || 'Unknown';
+            {allHabitsData.map((habit: any) => {
+              const count = habit.statuses.filter((s: any) => s.status === 'completed').length;
+              const name = HABIT_NAMES[habit.id as keyof typeof HABIT_NAMES] || 'Unknown';
               
               return (
                 <div key={habit.id} style={{
@@ -156,7 +159,7 @@ export default async function handler(req) {
                   </div>
                   
                   <div style={{ display: 'flex', gap: cellGap }}>
-                    {habit.statuses.map((day, i) => {
+                    {habit.statuses.map((day: any, i: number) => {
                       let bg = '#1a1a1a';
                       if (day.status === 'completed') bg = '#fff';
                       else if (day.status === 'in_progress') bg = '#666';
@@ -193,7 +196,7 @@ export default async function handler(req) {
       ),
       { width, height }
     );
-  } catch (error) {
+  } catch (error: any) {
     return new Response('Error: ' + error.message, { status: 500 });
   }
 }
