@@ -1,8 +1,13 @@
-// Vercel Serverless Function to update cache in Vercel KV
+// Vercel Serverless Function to update cache in Upstash Redis
 // Call this endpoint to refresh the cache: /api/update-cache
 
 const https = require('https');
-const { kv } = require('@vercel/kv');
+const { Redis } = require('@upstash/redis');
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
 
@@ -107,20 +112,20 @@ module.exports = async (req, res) => {
     
     const updatedAt = new Date().toISOString();
     
-    // Store in Vercel KV with 24 hour expiration
-    await kv.set('habits', habitsResponse, { ex: 86400 });
-    await kv.set('habitsData', allHabitsData, { ex: 86400 });
-    await kv.set('lastUpdated', updatedAt, { ex: 86400 });
+    // Store in Upstash Redis with 24 hour expiration
+    await redis.set('habits', habitsResponse, { ex: 86400 });
+    await redis.set('habitsData', allHabitsData, { ex: 86400 });
+    await redis.set('lastUpdated', updatedAt, { ex: 86400 });
     
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json({
       success: true,
-      message: 'Cache updated in Vercel KV',
+      message: 'Cache updated in Upstash Redis',
       habitsCount: HABIT_IDS.length,
       daysCount: days,
       totalRecords: allHabitsData.reduce((sum, h) => sum + h.statuses.length, 0),
       updatedAt: updatedAt,
-      storage: 'Vercel KV',
+      storage: 'Upstash Redis',
       expiration: '24 hours'
     });
   } catch (error) {

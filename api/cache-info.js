@@ -1,11 +1,16 @@
 // Vercel Serverless Function to check cache status
-const { kv } = require('@vercel/kv');
+const { Redis } = require('@upstash/redis');
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
 
 module.exports = async (req, res) => {
   try {
-    const lastUpdated = await kv.get('lastUpdated');
-    const habits = await kv.get('habits');
-    const habitsData = await kv.get('habitsData');
+    const lastUpdated = await redis.get('lastUpdated');
+    const habits = await redis.get('habits');
+    const habitsData = await redis.get('habitsData');
     
     const hasCachedData = !!(habits && habitsData);
     const cacheAge = lastUpdated 
@@ -21,7 +26,7 @@ module.exports = async (req, res) => {
       habitsCount: habits?.data?.length || 0,
       habitsDataCount: habitsData?.length || 0,
       totalStatuses: habitsData?.reduce((sum, h) => sum + h.statuses.length, 0) || 0,
-      storage: 'Vercel KV',
+      storage: 'Upstash Redis',
       ttl: '24 hours',
       updateUrl: '/api/update-cache'
     });
