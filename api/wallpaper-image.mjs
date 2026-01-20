@@ -107,18 +107,20 @@ function generateSVG(habitsData, width, height) {
   return svg;
 }
 
-export default async function handler(req) {
+export default async function handler(req, res) {
   try {
-    const { searchParams } = new URL(req.url);
-    const width = parseInt(searchParams.get('width')) || 1284;
-    const height = parseInt(searchParams.get('height')) || 2778;
-    const days = parseInt(searchParams.get('days')) || 30;
+    // Parse query parameters from Vercel serverless function
+    const url = new URL(req.url || '', `http://${req.headers.host}`);
+    const width = parseInt(url.searchParams.get('width')) || 1284;
+    const height = parseInt(url.searchParams.get('height')) || 2778;
+    const days = parseInt(url.searchParams.get('days')) || 30;
     
     const cachedHabitsData = await kv.get('habitsData');
     const cachedHabits = await kv.get('habits');
     
     if (!cachedHabitsData || !cachedHabits) {
-      return new Response('No cache available. Please wait for data to sync.', { status: 503 });
+      res.status(503).send('No cache available. Please wait for data to sync.');
+      return;
     }
     
     const habitsMap = {};
@@ -154,14 +156,11 @@ export default async function handler(req) {
     
     const svgContent = generateSVG(allHabitsData, width, height);
     
-    return new Response(svgContent, {
-      headers: {
-        'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-      },
-    });
+    res.setHeader('Content-Type', 'image/svg+xml');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.status(200).send(svgContent);
   } catch (error) {
     console.error('Error generating wallpaper:', error);
-    return new Response('Error generating wallpaper: ' + error.message, { status: 500 });
+    res.status(500).send('Error generating wallpaper: ' + error.message);
   }
 }
