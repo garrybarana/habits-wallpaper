@@ -106,12 +106,12 @@ export default async function handler(req: NextRequest) {
     const rate = total > 0 ? ((completed / total) * 100).toFixed(0) : 0;
     
     const pad = 60;
-    const startY = 650;
-    const headerH = 100;
+    const startY = 400;
+    const headerH = 80;
     const cellSize = 16;
     const cellGap = 4;
-    const rowH = 65;
-    const nameW = 200;
+    const rowH = 50;
+    const nameW = 180;
     
     return new ImageResponse(
       (
@@ -120,30 +120,27 @@ export default async function handler(req: NextRequest) {
           height: height,
           backgroundColor: '#000000',
           display: 'flex',
-          position: 'relative',
-          fontFamily: 'Arial',
+          flexDirection: 'column',
+          padding: `${startY}px ${pad}px`,
+          fontFamily: 'system-ui, sans-serif',
         }}>
           <div style={{
-            position: 'absolute',
-            top: startY,
-            left: pad,
             display: 'flex',
             flexDirection: 'column',
+            marginBottom: headerH,
           }}>
-            <div style={{ fontSize: 40, fontWeight: 700, color: '#fff' }}>
+            <div style={{ fontSize: 48, fontWeight: 700, color: '#fff' }}>
               Habits
             </div>
-            <div style={{ fontSize: 18, fontWeight: 500, color: '#666', marginTop: 10 }}>
+            <div style={{ fontSize: 20, fontWeight: 500, color: '#666', marginTop: 16 }}>
               {rate}% complete
             </div>
           </div>
           
           <div style={{
-            position: 'absolute',
-            top: startY + headerH,
-            left: pad,
             display: 'flex',
             flexDirection: 'column',
+            gap: rowH,
           }}>
             {allHabitsData.map((habit: any) => {
               const count = habit.statuses.filter((s: any) => s.status === 'completed').length;
@@ -153,13 +150,12 @@ export default async function handler(req: NextRequest) {
                 <div key={habit.id} style={{
                   display: 'flex',
                   alignItems: 'center',
-                  marginBottom: rowH - 24,
                 }}>
-                  <div style={{ fontSize: 16, fontWeight: 500, color: '#fff', width: nameW }}>
+                  <div style={{ fontSize: 18, fontWeight: 500, color: '#fff', width: nameW, flexShrink: 0 }}>
                     {name}
                   </div>
                   
-                  <div style={{ display: 'flex', gap: cellGap }}>
+                  <div style={{ display: 'flex', gap: cellGap, marginLeft: 24 }}>
                     {habit.statuses.map((day: any, i: number) => {
                       let bg = '#1a1a1a';
                       if (day.status === 'completed') bg = '#fff';
@@ -171,28 +167,19 @@ export default async function handler(req: NextRequest) {
                           height: cellSize,
                           backgroundColor: bg,
                           borderRadius: 5,
+                        }} />4,
+                          flexShrink: 0,
                         }} />
                       );
                     })}
                   </div>
                   
-                  <div style={{ fontSize: 15, fontWeight: 500, color: '#666', marginLeft: 20 }}>
+                  <div style={{ fontSize: 16, fontWeight: 600, color: '#888', marginLeft: 24 }}>
                     {count}
                   </div>
                 </div>
               );
-            })}
-          </div>
-          
-          <div style={{
-            position: 'absolute',
-            bottom: 450,
-            left: pad,
-            fontSize: 14,
-            color: '#333',
-          }}>
-            Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-          </div>
+           
         </div>
       ),
       { width, height }
