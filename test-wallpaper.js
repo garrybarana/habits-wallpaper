@@ -88,8 +88,11 @@ function generateWallpaperImage(habitsData, width, height) {
   ${habitsData.map((habit, habitIndex) => {
     const y = startY + headerHeight + habitIndex * rowHeight;
     const completed = habit.statuses.filter(s => s.status === 'completed').length;
-    // Remove all emojis and special characters, escape XML entities
-    const habitName = habit.name.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
+    // Strip all non-ASCII characters for Sharp compatibility
+    const habitName = habit.name
+      .replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '') // Remove emojis
+      .replace(/[^\x00-\x7F]/g, '') // Remove all non-ASCII
+      .trim();
     const shortName = (habitName.length > 28 ? habitName.substring(0, 28) + '...' : habitName)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
