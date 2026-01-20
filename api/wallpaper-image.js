@@ -85,16 +85,27 @@ function generateWallpaperImage(habitsData, width, height) {
   const rowHeight = 65;
   const habitNameWidth = 200;
   
-  // Generate minimalist dark SVG
+  // Generate minimalist dark SVG with proper font specification
   let svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @font-face {
+        font-family: 'Arial';
+        src: local('Arial'), local('Helvetica'), local('sans-serif');
+      }
+      text {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </defs>
   
   <!-- Dark background -->
   <rect width="${width}" height="${height}" fill="#000000"/>
   
   <!-- Minimalist header (below clock safe zone) -->
-  <text x="${padding}" y="${startY}" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
-  <text x="${padding}" y="${startY + 45}" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#666666">${completionRate}% complete</text>
+  <text x="${padding}" y="${startY}" font-size="40" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
+  <text x="${padding}" y="${startY + 45}" font-size="18" font-weight="500" fill="#666666">${completionRate}% complete</text>
   
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
@@ -105,7 +116,7 @@ function generateWallpaperImage(habitsData, width, height) {
     
     return `
   <!-- Habit name -->
-  <text x="${padding}" y="${y + 24}" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#ffffff">${habitName}</text>
+  <text x="${padding}" y="${y + 24}" font-size="16" font-weight="500" fill="#ffffff">${habitName}</text>
   
   <!-- Days grid -->
   ${habit.statuses.map((day, dayIndex) => {
@@ -123,12 +134,12 @@ function generateWallpaperImage(habitsData, width, height) {
   }).join('')}
   
   <!-- Completion count -->
-  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-family="Arial, sans-serif" font-size="15" font-weight="500" fill="#666666">${completed}</text>
+  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-size="15" font-weight="500" fill="#666666">${completed}</text>
     `;
   }).join('')}
   
   <!-- Footer (above bottom safe zone) -->
-  <text x="${padding}" y="${height - 450}" font-family="Arial, sans-serif" font-size="14" font-weight="400" fill="#333333">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
+  <text x="${padding}" y="${height - 450}" font-size="14" font-weight="400" fill="#333333">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
   
 </svg>`;
   
