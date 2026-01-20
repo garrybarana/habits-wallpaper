@@ -82,22 +82,6 @@ function generateWallpaperImage(habitsData, width, height) {
   <text x="${padding}" y="${headerHeight - 120}" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#ffffff" letter-spacing="-2">Habits</text>
   <text x="${padding}" y="${headerHeight - 60}" font-family="Arial, sans-serif" font-size="22" font-weight="500" fill="#666666">${completionRate}% complete · ${daysToShow} days</text>
   
-  <!-- Live Badge -->
-  <rect x="${width/2 - 110}" y="${containerTop + 40}" width="220" height="30" rx="15" fill="#48bb78"/>
-  <circle cx="${width/2 - 80}" cy="${containerTop + 55}" r="5" fill="white" opacity="0.9">
-    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
-  </circle>
-  <text x="${width/2 - 60}" y="${containerTop + 60}" font-family="Arial, sans-serif" font-size="15" font-weight="600" fill="white" text-anchor="start">SMART: Cache + Today</text>
-  
-  <!-- Title -->
-  <text x="${width/2}" y="${containerTop + 120}" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#2d3748" text-anchor="middle">Habit Streak</text>
-  
-  <!-- Completion Ring -->
-  <circle cx="${width/2}" cy="${containerTop + 230}" r="70" fill="none" stroke="#e2e8f0" stroke-width="18"/>
-  <circle cx="${width/2}" cy="${containerTop + 230}" r="70" fill="none" stroke="#48bb78" stroke-width="18" 
-    stroke-dasharray="${2 * Math.PI * 70}" 
-    stroke-dashoffset="${2 * Math.PI * 70 * (1 - completionRate / 100)}"
-  
   <!-- Habits Grid -->
   ${habitsData.map((habit, habitIndex) => {
     const y = headerHeight + habitIndex * rowHeight;
