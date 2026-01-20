@@ -1,4 +1,3 @@
-import { ImageResponse } from '@vercel/og';
 import { kv } from '@vercel/kv';
 
 export const config = {
@@ -51,7 +50,127 @@ async function getHabitStatus(habitId, targetDate) {
   };
 }
 
-function HabitWallpaper({ habitsData, width, height }) {
+function generateSVG(habitsData, width, height) {
+  // Calculate metrics
+  const completedTotal = habitsData.reduce((sum, habit) => 
+    sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
+  const totalDays = habitsData.reduce((sum, habit) => sum + habit.statuses.length, 0);
+  const completionRate = totalDays > 0 ? ((completedTotal / totalDays) * 100).toFixed(0) : 0;
+  
+  const daysToShow = habitsData[0]?.statuses.length || 30;
+  
+  // Layout config
+  const padding = 60;
+  const startY = 650;
+  const headerHeight = 100;
+  const cellSize = 16;
+  const cellGap = 4;
+  const rowHeight = 65;
+  const habitNameWidth = 200;
+  
+  // Generate SVG
+  let svg = `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="${width}" height="${height}" fill="#000000"/>
+  
+  <!-- Header -->
+  <text x="${padding}" y="${startY}" font-size="40" font-weight="700" fill="#ffffff" font-family="Arial, sans-serif">Habits</text>
+  <text x="${padding}" y="${startY + 45}" font-size="18" font-weight="500" fill="#666666" font-family="Arial, sans-serif">${completionRate}% complete</text>
+  
+  <!-- Habits -->`;
+
+  habitsData.forEach((habit, habitIndex) => {
+    const y = startY + headerHeight + habitIndex * rowHeight;
+    const completed = habit.statuses.filter(s => s.status === 'completed').length;
+    const habitName = HABIT_NAMES[habit.id] || 'Unknown';
+    
+    svg += `
+  <text x="${padding}" y="${y + 24}" font-size="16" font-weight="500" fill="#ffffff" font-family="Arial, sans-serif">${habitName}</text>`;
+    
+    habit.statuses.forEach((day, dayIndex) => {
+      const x = padding + habitNameWidth + dayIndex * (cellSize + cellGap);
+      let fill = '#1a1a1a';
+      
+      if (day.status === 'completed') {
+        fill = '#ffffff';
+      } else if (day.status === 'in_progress') {
+        fill = '#666666';
+      }
+      
+      svg += `
+  <rect x="${x}" y="${y + 10}" width="${cellSize}" height="${cellSize}" rx="5" fill="${fill}"/>`;
+    });
+    
+    svg += `
+  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-size="15" font-weight="500" fill="#666666" font-family="Arial, sans-serif">${completed}</text>`;
+  });
+  
+  svg += `
+  
+  <!-- Footer -->
+  <text x="${padding}" y="${height - 450}" font-size="14" font-weight="400" fill="#333333" font-family="Arial, sans-serif">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
+</svg>`;
+  
+  return svg;
+}
+
+export default async function handler(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const width = parseInt(searchParams.get('width')) || 1284;
+    const height = parseInt(searchParams.get('height')) || 2778;
+    const days = parseInt(searchParams.get('days')) || 30;
+    
+    const cachedHabitsData = await kv.get('habitsData');
+    const cachedHabits = await kv.get('habits');
+    
+    if (!cachedHabitsData || !cachedHabits) {
+      return new Response('No cache available. Please wait for data to sync.', { status: 503 });
+    }
+    
+    const habitsMap = {};
+    cachedHabits.data.forEach(habit => {
+      habitsMap[habit.id] = habit.name;
+    });
+    
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    
+    const allHabitsData = [];
+    
+    for (const habitId of HABIT_IDS) {
+      const cachedHabit = cachedHabitsData.find(h => h.id === habitId);
+      let statuses = cachedHabit ? [...cachedHabit.statuses] : [];
+      statuses = statuses.filter(s => s.date !== todayStr);
+      
+      try {
+        const todayStatus = await getHabitStatus(habitId, today);
+        statuses.push(todayStatus);
+      } catch (error) {
+        console.error(`Failed to fetch today's status for ${habitId}`);
+      }
+      
+      statuses = statuses.slice(-days);
+      
+      allHabitsData.push({
+        id: habitId,
+        name: habitsMap[habitId] || 'Unknown',
+        statuses: statuses
+      });
+    }
+    
+    const svgContent = generateSVG(allHabitsData, width, height);
+    
+    return new Response(svgContent, {
+      headers: {
+        'Content-Type': 'image/svg+xml',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+      },
+    });
+  } catch (error) {
+    console.error('Error generating wallpaper:', error);
+    return new Response('Error generating wallpaper: ' + error.message, { status: 500 });
+  }
+}
   // Calculate metrics
   const completedTotal = habitsData.reduce((sum, habit) => 
     sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
