@@ -1,0 +1,28 @@
+name: Update Habit Cache Daily
+
+on:
+  schedule:
+    # Run at 8 AM UTC daily (adjust timezone as needed)
+    - cron: '0 8 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Vercel KV Cache
+        run: |
+          response=$(curl -s -w "\n%{http_code}" "https://habits-wallpaper.vercel.app/api/update-cache")
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | head -n-1)
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "Failed to update cache"
+            exit 1
+          fi
+          
+          echo "Cache updated successfully!"
