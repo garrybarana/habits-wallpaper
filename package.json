@@ -1,0 +1,12 @@
+{
+  "name": "habitify-wallpaper",
+  "version": "1.0.0",
+  "description": "Habit streak wallpaper generator",
+  "main": "api/wallpaper.js",
+  "scripts": {
+    "dev": "node generateHabitWallpaper.js",
+    "start": "node generateHabitWallpaper.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

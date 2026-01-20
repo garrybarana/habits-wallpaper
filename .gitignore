@@ -1,0 +1,16 @@
+# Don't commit sensitive data
+habitify-cache.json
+
+# Node modules
+node_modules/
+
+# Vercel
+.vercel
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

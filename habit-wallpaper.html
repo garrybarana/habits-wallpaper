@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habit Streak Calendar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 95vw;
+            overflow-x: auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .calendar {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-top: 20px;
+        }
+        
+        .habit-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .habit-label {
+            width: 300px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+            padding-right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .streak-count {
+            font-size: 12px;
+            color: #718096;
+            font-weight: normal;
+        }
+        
+        .days-container {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .day-cell {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .day-cell:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .day-cell.completed {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .day-cell.in-progress {
+            background: linear-gradient(135deg, #ecc94b, #d69e2e);
+        }
+        
+        .day-cell.skipped {
+            background: #e2e8f0;
+        }
+        
+        .day-cell::after {
+            content: attr(data-date);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 9px;
+            color: #a0aec0;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .day-cell:hover::after {
+            opacity: 1;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .legend-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f7fafc;
+            border-radius: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #718096;
+            margin-top: 5px;
+        }
+        
+        .download-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Habit Streak Calendar</h1>
+        <div class="subtitle">Your 30-Day Habit Journey</div>
+        
+        <div class="calendar">
+            
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>VSCODE 100 DAY Challenge </span>
+          <span class="streak-count">5/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell skipped" data-date="2025-12-22" title="2025-12-22: none"></div><div class="day-cell skipped" data-date="2025-12-23" title="2025-12-23: none"></div><div class="day-cell skipped" data-date="2025-12-24" title="2025-12-24: none"></div><div class="day-cell skipped" data-date="2025-12-25" title="2025-12-25: none"></div><div class="day-cell skipped" data-date="2025-12-26" title="2025-12-26: none"></div><div class="day-cell skipped" data-date="2025-12-27" title="2025-12-27: none"></div><div class="day-cell skipped" data-date="2025-12-28" title="2025-12-28: none"></div><div class="day-cell skipped" data-date="2025-12-29" title="2025-12-29: none"></div><div class="day-cell skipped" data-date="2025-12-30" title="2025-12-30: none"></div><div class="day-cell skipped" data-date="2025-12-31" title="2025-12-31: none"></div><div class="day-cell skipped" data-date="2026-01-01" title="2026-01-01: none"></div><div class="day-cell skipped" data-date="2026-01-02" title="2026-01-02: none"></div><div class="day-cell skipped" data-date="2026-01-03" title="2026-01-03: none"></div><div class="day-cell skipped" data-date="2026-01-04" title="2026-01-04: none"></div><div class="day-cell skipped" data-date="2026-01-05" title="2026-01-05: none"></div><div class="day-cell skipped" data-date="2026-01-06" title="2026-01-06: none"></div><div class="day-cell skipped" data-date="2026-01-07" title="2026-01-07: none"></div><div class="day-cell skipped" data-date="2026-01-08" title="2026-01-08: none"></div><div class="day-cell skipped" data-date="2026-01-09" title="2026-01-09: none"></div><div class="day-cell skipped" data-date="2026-01-10" title="2026-01-10: none"></div><div class="day-cell skipped" data-date="2026-01-11" title="2026-01-11: none"></div><div class="day-cell skipped" data-date="2026-01-12" title="2026-01-12: none"></div><div class="day-cell skipped" data-date="2026-01-13" title="2026-01-13: none"></div><div class="day-cell in-progress" data-date="2026-01-14" title="2026-01-14: in_progress"></div><div class="day-cell completed" data-date="2026-01-15" title="2026-01-15: completed"></div><div class="day-cell completed" data-date="2026-01-16" title="2026-01-16: completed"></div><div class="day-cell completed" data-date="2026-01-17" title="2026-01-17: completed"></div><div class="day-cell completed" data-date="2026-01-18" title="2026-01-18: completed"></div><div class="day-cell completed" data-date="2026-01-19" title="2026-01-19: completed"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Eat Garlic Empty Stomach 🧄</span>
+          <span class="streak-count">25/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell completed" data-date="2025-12-22" title="2025-12-22: completed"></div><div class="day-cell in-progress" data-date="2025-12-23" title="2025-12-23: in_progress"></div><div class="day-cell completed" data-date="2025-12-24" title="2025-12-24: completed"></div><div class="day-cell completed" data-date="2025-12-25" title="2025-12-25: completed"></div><div class="day-cell completed" data-date="2025-12-26" title="2025-12-26: completed"></div><div class="day-cell in-progress" data-date="2025-12-27" title="2025-12-27: in_progress"></div><div class="day-cell completed" data-date="2025-12-28" title="2025-12-28: completed"></div><div class="day-cell completed" data-date="2025-12-29" title="2025-12-29: completed"></div><div class="day-cell completed" data-date="2025-12-30" title="2025-12-30: completed"></div><div class="day-cell completed" data-date="2025-12-31" title="2025-12-31: completed"></div><div class="day-cell completed" data-date="2026-01-01" title="2026-01-01: completed"></div><div class="day-cell completed" data-date="2026-01-02" title="2026-01-02: completed"></div><div class="day-cell completed" data-date="2026-01-03" title="2026-01-03: completed"></div><div class="day-cell completed" data-date="2026-01-04" title="2026-01-04: completed"></div><div class="day-cell completed" data-date="2026-01-05" title="2026-01-05: completed"></div><div class="day-cell in-progress" data-date="2026-01-06" title="2026-01-06: in_progress"></div><div class="day-cell completed" data-date="2026-01-07" title="2026-01-07: completed"></div><div class="day-cell completed" data-date="2026-01-08" title="2026-01-08: completed"></div><div class="day-cell completed" data-date="2026-01-09" title="2026-01-09: completed"></div><div class="day-cell completed" data-date="2026-01-10" title="2026-01-10: completed"></div><div class="day-cell in-progress" data-date="2026-01-11" title="2026-01-11: in_progress"></div><div class="day-cell completed" data-date="2026-01-12" title="2026-01-12: completed"></div><div class="day-cell completed" data-date="2026-01-13" title="2026-01-13: completed"></div><div class="day-cell completed" data-date="2026-01-14" title="2026-01-14: completed"></div><div class="day-cell completed" data-date="2026-01-15" title="2026-01-15: completed"></div><div class="day-cell completed" data-date="2026-01-16" title="2026-01-16: completed"></div><div class="day-cell completed" data-date="2026-01-17" title="2026-01-17: completed"></div><div class="day-cell completed" data-date="2026-01-18" title="2026-01-18: completed"></div><div class="day-cell completed" data-date="2026-01-19" title="2026-01-19: completed"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Meditate</span>
+          <span class="streak-count">1/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell in-progress" data-date="2025-12-22" title="2025-12-22: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-23" title="2025-12-23: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-24" title="2025-12-24: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-25" title="2025-12-25: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-26" title="2025-12-26: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-27" title="2025-12-27: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-28" title="2025-12-28: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-29" title="2025-12-29: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-30" title="2025-12-30: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-31" title="2025-12-31: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-01" title="2026-01-01: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-02" title="2026-01-02: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-03" title="2026-01-03: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-04" title="2026-01-04: in_progress"></div><div class="day-cell completed" data-date="2026-01-05" title="2026-01-05: completed"></div><div class="day-cell in-progress" data-date="2026-01-06" title="2026-01-06: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-07" title="2026-01-07: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-08" title="2026-01-08: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-09" title="2026-01-09: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-10" title="2026-01-10: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-11" title="2026-01-11: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-12" title="2026-01-12: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-13" title="2026-01-13: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-14" title="2026-01-14: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-15" title="2026-01-15: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-16" title="2026-01-16: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-17" title="2026-01-17: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-18" title="2026-01-18: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-19" title="2026-01-19: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>🛌 7 hours Sleep </span>
+          <span class="streak-count">17/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell skipped" data-date="2025-12-22" title="2025-12-22: none"></div><div class="day-cell completed" data-date="2025-12-23" title="2025-12-23: completed"></div><div class="day-cell completed" data-date="2025-12-24" title="2025-12-24: completed"></div><div class="day-cell completed" data-date="2025-12-25" title="2025-12-25: completed"></div><div class="day-cell in-progress" data-date="2025-12-26" title="2025-12-26: in_progress"></div><div class="day-cell completed" data-date="2025-12-27" title="2025-12-27: completed"></div><div class="day-cell completed" data-date="2025-12-28" title="2025-12-28: completed"></div><div class="day-cell completed" data-date="2025-12-29" title="2025-12-29: completed"></div><div class="day-cell in-progress" data-date="2025-12-30" title="2025-12-30: in_progress"></div><div class="day-cell completed" data-date="2025-12-31" title="2025-12-31: completed"></div><div class="day-cell completed" data-date="2026-01-01" title="2026-01-01: completed"></div><div class="day-cell completed" data-date="2026-01-02" title="2026-01-02: completed"></div><div class="day-cell completed" data-date="2026-01-03" title="2026-01-03: completed"></div><div class="day-cell in-progress" data-date="2026-01-04" title="2026-01-04: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-05" title="2026-01-05: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-06" title="2026-01-06: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-07" title="2026-01-07: in_progress"></div><div class="day-cell completed" data-date="2026-01-08" title="2026-01-08: completed"></div><div class="day-cell in-progress" data-date="2026-01-09" title="2026-01-09: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-10" title="2026-01-10: in_progress"></div><div class="day-cell completed" data-date="2026-01-11" title="2026-01-11: completed"></div><div class="day-cell in-progress" data-date="2026-01-12" title="2026-01-12: in_progress"></div><div class="day-cell completed" data-date="2026-01-13" title="2026-01-13: completed"></div><div class="day-cell completed" data-date="2026-01-14" title="2026-01-14: completed"></div><div class="day-cell completed" data-date="2026-01-15" title="2026-01-15: completed"></div><div class="day-cell completed" data-date="2026-01-16" title="2026-01-16: completed"></div><div class="day-cell in-progress" data-date="2026-01-17" title="2026-01-17: in_progress"></div><div class="day-cell completed" data-date="2026-01-18" title="2026-01-18: completed"></div><div class="day-cell in-progress" data-date="2026-01-19" title="2026-01-19: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Daily Walk 👣</span>
+          <span class="streak-count">29/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell completed" data-date="2025-12-22" title="2025-12-22: completed"></div><div class="day-cell completed" data-date="2025-12-23" title="2025-12-23: completed"></div><div class="day-cell completed" data-date="2025-12-24" title="2025-12-24: completed"></div><div class="day-cell completed" data-date="2025-12-25" title="2025-12-25: completed"></div><div class="day-cell completed" data-date="2025-12-26" title="2025-12-26: completed"></div><div class="day-cell completed" data-date="2025-12-27" title="2025-12-27: completed"></div><div class="day-cell completed" data-date="2025-12-28" title="2025-12-28: completed"></div><div class="day-cell completed" data-date="2025-12-29" title="2025-12-29: completed"></div><div class="day-cell completed" data-date="2025-12-30" title="2025-12-30: completed"></div><div class="day-cell completed" data-date="2025-12-31" title="2025-12-31: completed"></div><div class="day-cell completed" data-date="2026-01-01" title="2026-01-01: completed"></div><div class="day-cell completed" data-date="2026-01-02" title="2026-01-02: completed"></div><div class="day-cell completed" data-date="2026-01-03" title="2026-01-03: completed"></div><div class="day-cell completed" data-date="2026-01-04" title="2026-01-04: completed"></div><div class="day-cell completed" data-date="2026-01-05" title="2026-01-05: completed"></div><div class="day-cell completed" data-date="2026-01-06" title="2026-01-06: completed"></div><div class="day-cell completed" data-date="2026-01-07" title="2026-01-07: completed"></div><div class="day-cell completed" data-date="2026-01-08" title="2026-01-08: completed"></div><div class="day-cell completed" data-date="2026-01-09" title="2026-01-09: completed"></div><div class="day-cell completed" data-date="2026-01-10" title="2026-01-10: completed"></div><div class="day-cell completed" data-date="2026-01-11" title="2026-01-11: completed"></div><div class="day-cell completed" data-date="2026-01-12" title="2026-01-12: completed"></div><div class="day-cell completed" data-date="2026-01-13" title="2026-01-13: completed"></div><div class="day-cell completed" data-date="2026-01-14" title="2026-01-14: completed"></div><div class="day-cell completed" data-date="2026-01-15" title="2026-01-15: completed"></div><div class="day-cell completed" data-date="2026-01-16" title="2026-01-16: completed"></div><div class="day-cell completed" data-date="2026-01-17" title="2026-01-17: completed"></div><div class="day-cell completed" data-date="2026-01-18" title="2026-01-18: completed"></div><div class="day-cell completed" data-date="2026-01-19" title="2026-01-19: completed"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Read 30 Mins 📚</span>
+          <span class="streak-count">1/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell in-progress" data-date="2025-12-22" title="2025-12-22: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-23" title="2025-12-23: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-24" title="2025-12-24: in_progress"></div><div class="day-cell completed" data-date="2025-12-25" title="2025-12-25: completed"></div><div class="day-cell in-progress" data-date="2025-12-26" title="2025-12-26: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-27" title="2025-12-27: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-28" title="2025-12-28: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-29" title="2025-12-29: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-30" title="2025-12-30: in_progress"></div><div class="day-cell in-progress" data-date="2025-12-31" title="2025-12-31: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-01" title="2026-01-01: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-02" title="2026-01-02: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-03" title="2026-01-03: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-04" title="2026-01-04: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-05" title="2026-01-05: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-06" title="2026-01-06: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-07" title="2026-01-07: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-08" title="2026-01-08: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-09" title="2026-01-09: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-10" title="2026-01-10: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-11" title="2026-01-11: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-12" title="2026-01-12: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-13" title="2026-01-13: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-14" title="2026-01-14: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-15" title="2026-01-15: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-16" title="2026-01-16: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-17" title="2026-01-17: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-18" title="2026-01-18: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-19" title="2026-01-19: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Daily Skin Care 🧴</span>
+          <span class="streak-count">1/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell skipped" data-date="2025-12-22" title="2025-12-22: none"></div><div class="day-cell skipped" data-date="2025-12-23" title="2025-12-23: none"></div><div class="day-cell skipped" data-date="2025-12-24" title="2025-12-24: none"></div><div class="day-cell skipped" data-date="2025-12-25" title="2025-12-25: none"></div><div class="day-cell skipped" data-date="2025-12-26" title="2025-12-26: none"></div><div class="day-cell skipped" data-date="2025-12-27" title="2025-12-27: none"></div><div class="day-cell skipped" data-date="2025-12-28" title="2025-12-28: none"></div><div class="day-cell skipped" data-date="2025-12-29" title="2025-12-29: none"></div><div class="day-cell skipped" data-date="2025-12-30" title="2025-12-30: none"></div><div class="day-cell skipped" data-date="2025-12-31" title="2025-12-31: none"></div><div class="day-cell skipped" data-date="2026-01-01" title="2026-01-01: none"></div><div class="day-cell skipped" data-date="2026-01-02" title="2026-01-02: none"></div><div class="day-cell skipped" data-date="2026-01-03" title="2026-01-03: none"></div><div class="day-cell skipped" data-date="2026-01-04" title="2026-01-04: none"></div><div class="day-cell completed" data-date="2026-01-05" title="2026-01-05: completed"></div><div class="day-cell in-progress" data-date="2026-01-06" title="2026-01-06: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-07" title="2026-01-07: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-08" title="2026-01-08: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-09" title="2026-01-09: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-10" title="2026-01-10: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-11" title="2026-01-11: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-12" title="2026-01-12: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-13" title="2026-01-13: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-14" title="2026-01-14: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-15" title="2026-01-15: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-16" title="2026-01-16: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-17" title="2026-01-17: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-18" title="2026-01-18: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-19" title="2026-01-19: in_progress"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+      <div class="habit-row">
+        <div class="habit-label">
+          <span>Drink Water 💧 </span>
+          <span class="streak-count">29/30</span>
+        </div>
+        <div class="days-container"><div class="day-cell completed" data-date="2025-12-22" title="2025-12-22: completed"></div><div class="day-cell completed" data-date="2025-12-23" title="2025-12-23: completed"></div><div class="day-cell completed" data-date="2025-12-24" title="2025-12-24: completed"></div><div class="day-cell completed" data-date="2025-12-25" title="2025-12-25: completed"></div><div class="day-cell completed" data-date="2025-12-26" title="2025-12-26: completed"></div><div class="day-cell completed" data-date="2025-12-27" title="2025-12-27: completed"></div><div class="day-cell completed" data-date="2025-12-28" title="2025-12-28: completed"></div><div class="day-cell completed" data-date="2025-12-29" title="2025-12-29: completed"></div><div class="day-cell completed" data-date="2025-12-30" title="2025-12-30: completed"></div><div class="day-cell completed" data-date="2025-12-31" title="2025-12-31: completed"></div><div class="day-cell completed" data-date="2026-01-01" title="2026-01-01: completed"></div><div class="day-cell completed" data-date="2026-01-02" title="2026-01-02: completed"></div><div class="day-cell completed" data-date="2026-01-03" title="2026-01-03: completed"></div><div class="day-cell completed" data-date="2026-01-04" title="2026-01-04: completed"></div><div class="day-cell completed" data-date="2026-01-05" title="2026-01-05: completed"></div><div class="day-cell completed" data-date="2026-01-06" title="2026-01-06: completed"></div><div class="day-cell completed" data-date="2026-01-07" title="2026-01-07: completed"></div><div class="day-cell completed" data-date="2026-01-08" title="2026-01-08: completed"></div><div class="day-cell completed" data-date="2026-01-09" title="2026-01-09: completed"></div><div class="day-cell completed" data-date="2026-01-10" title="2026-01-10: completed"></div><div class="day-cell completed" data-date="2026-01-11" title="2026-01-11: completed"></div><div class="day-cell completed" data-date="2026-01-12" title="2026-01-12: completed"></div><div class="day-cell completed" data-date="2026-01-13" title="2026-01-13: completed"></div><div class="day-cell completed" data-date="2026-01-14" title="2026-01-14: completed"></div><div class="day-cell completed" data-date="2026-01-15" title="2026-01-15: completed"></div><div class="day-cell completed" data-date="2026-01-16" title="2026-01-16: completed"></div><div class="day-cell completed" data-date="2026-01-17" title="2026-01-17: completed"></div><div class="day-cell completed" data-date="2026-01-18" title="2026-01-18: completed"></div><div class="day-cell completed" data-date="2026-01-19" title="2026-01-19: completed"></div><div class="day-cell in-progress" data-date="2026-01-20" title="2026-01-20: in_progress"></div></div>
+      </div>
+    
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box completed"></div>
+                <span>Completed</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box in-progress"></div>
+                <span>In Progress</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box skipped"></div>
+                <span>Not Done</span>
+            </div>
+        </div>
+        
+        
+    <div class="stats">
+      <div class="stat-item">
+        <div class="stat-value">108</div>
+        <div class="stat-label">Total Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">45.0%</div>
+        <div class="stat-label">Completion Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Habits Tracked</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">30</div>
+        <div class="stat-label">Days Tracked</div>
+      </div>
+    </div>
+  
+        
+        <button class="download-btn" onclick="downloadImage()">📸 Download as Image</button>
+    </div>
+    
+    <script>
+        function downloadImage() {
+            // For now, users can use browser screenshot
+            alert('Use your browser\'s screenshot tool or "Print to PDF" to save this as an image!\n\nChrome: Right-click → "Save as PDF"\nWindows: Win + Shift + S\nMac: Cmd + Shift + 4');
+        }
+    </script>
+</body>
+</html>
