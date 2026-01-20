@@ -73,45 +73,42 @@ function HabitWallpaper({ habitsData, width, height }) {
   return (
     <div
       style={{
-        width: '100%',
-        height: '100%',
+        width: width,
+        height: height,
         backgroundColor: '#000000',
         display: 'flex',
-        flexDirection: 'column',
         position: 'relative',
-        fontFamily: 'Arial, sans-serif',
       }}
     >
       {/* Header */}
       <div
         style={{
           position: 'absolute',
-          left: `${padding}px`,
-          top: `${startY}px`,
+          left: padding,
+          top: startY,
           display: 'flex',
           flexDirection: 'column',
         }}
       >
-        <div
+        <span
           style={{
-            fontSize: '40px',
-            fontWeight: '700',
+            fontSize: 40,
+            fontWeight: 700,
             color: '#ffffff',
-            letterSpacing: '-1px',
           }}
         >
           Habits
-        </div>
-        <div
+        </span>
+        <span
           style={{
-            fontSize: '18px',
-            fontWeight: '500',
+            fontSize: 18,
+            fontWeight: 500,
             color: '#666666',
-            marginTop: '10px',
+            marginTop: 10,
           }}
         >
           {completionRate}% complete
-        </div>
+        </span>
       </div>
 
       {/* Habits Grid */}
@@ -125,26 +122,27 @@ function HabitWallpaper({ habitsData, width, height }) {
             key={habit.id}
             style={{
               position: 'absolute',
-              left: `${padding}px`,
-              top: `${y}px`,
+              left: padding,
+              top: y,
               display: 'flex',
+              flexDirection: 'row',
               alignItems: 'center',
             }}
           >
             {/* Habit name */}
-            <div
+            <span
               style={{
-                width: `${habitNameWidth}px`,
-                fontSize: '16px',
-                fontWeight: '500',
+                width: habitNameWidth,
+                fontSize: 16,
+                fontWeight: 500,
                 color: '#ffffff',
               }}
             >
               {habitName}
-            </div>
+            </span>
 
             {/* Days grid */}
-            <div style={{ display: 'flex', gap: `${cellGap}px`, marginLeft: '0px' }}>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
               {habit.statuses.map((day, dayIndex) => {
                 let fill = '#1a1a1a';
                 
@@ -158,10 +156,11 @@ function HabitWallpaper({ habitsData, width, height }) {
                   <div
                     key={dayIndex}
                     style={{
-                      width: `${cellSize}px`,
-                      height: `${cellSize}px`,
-                      borderRadius: '5px',
+                      width: cellSize,
+                      height: cellSize,
+                      borderRadius: 5,
                       backgroundColor: fill,
+                      marginLeft: dayIndex === 0 ? 0 : cellGap,
                     }}
                   />
                 );
@@ -169,16 +168,16 @@ function HabitWallpaper({ habitsData, width, height }) {
             </div>
 
             {/* Completion count */}
-            <div
+            <span
               style={{
-                marginLeft: '20px',
-                fontSize: '15px',
-                fontWeight: '500',
+                marginLeft: 20,
+                fontSize: 15,
+                fontWeight: 500,
                 color: '#666666',
               }}
             >
               {completed}
-            </div>
+            </span>
           </div>
         );
       })}
@@ -187,10 +186,10 @@ function HabitWallpaper({ habitsData, width, height }) {
       <div
         style={{
           position: 'absolute',
-          left: `${padding}px`,
-          top: `${height - 450}px`,
-          fontSize: '14px',
-          fontWeight: '400',
+          left: padding,
+          top: height - 450,
+          fontSize: 14,
+          fontWeight: 400,
           color: '#333333',
         }}
       >
