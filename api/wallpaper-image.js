@@ -1,6 +1,9 @@
-const https = require('https');
-const { kv } = require('@vercel/kv');
-const sharp = require('sharp');
+import { ImageResponse } from '@vercel/og';
+import { kv } from '@vercel/kv';
+
+export const config = {
+  runtime: 'edge',
+};
 
 const API_KEY = '70f7803269df1fc25ae36ec212690aa7cb0f2af66b1625b39d1fe981d203e733';
 
@@ -15,7 +18,6 @@ const HABIT_IDS = [
   'B8AF262B-C7E5-4061-88A3-EABF1A090F3B'
 ];
 
-// Hardcoded ASCII-only habit names to avoid Sharp font rendering issues
 const HABIT_NAMES = {
   '1FE92BED-FEF3-4AB1-A9F9-9093B8C35B68': 'VSCODE Challenge',
   '19166B2B-9887-4615-9E0E-29B897EBADD7': 'Eat Garlic',
@@ -27,27 +29,6 @@ const HABIT_NAMES = {
   'B8AF262B-C7E5-4061-88A3-EABF1A090F3B': 'Drink Water'
 };
 
-function httpsRequest(url, options) {
-  return new Promise((resolve, reject) => {
-    const req = https.request(url, options, (res) => {
-      let data = '';
-      res.on('data', (chunk) => data += chunk);
-      res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          try {
-            resolve(JSON.parse(data));
-          } catch (e) {
-            resolve(data);
-          }
-        } else {
-          reject(new Error(`HTTP ${res.statusCode}`));
-        }
-      });
-    });
-    req.on('error', reject);
-    req.end();
-  });
-}
 
 async function getHabitStatus(habitId, targetDate) {
   const formatDate = (date) => date.toISOString().slice(0, -5) + '+00:00';
@@ -55,18 +36,23 @@ async function getHabitStatus(habitId, targetDate) {
   const encodedDate = encodeURIComponent(formattedDate);
   const url = `https://api.habitify.me/status/${habitId}?target_date=${encodedDate}`;
 
-  const result = await httpsRequest(url, {
+  const response = await fetch(url, {
     method: 'GET',
     headers: { 'Authorization': API_KEY }
   });
 
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  const result = await response.json();
   return {
     date: targetDate.toISOString().split('T')[0],
     ...result.data
   };
 }
 
-function generateWallpaperImage(habitsData, width, height) {
+function HabitWallpaper({ habitsData, width, height }) {
   // Calculate metrics
   const completedTotal = habitsData.reduce((sum, habit) => 
     sum + habit.statuses.filter(s => s.status === 'completed').length, 0);
@@ -75,133 +61,203 @@ function generateWallpaperImage(habitsData, width, height) {
   
   const daysToShow = habitsData[0]?.statuses.length || 30;
   
-  // Dark minimalist design optimized for iPhone 14 Pro Max
-  // Lock screen safe zones: avoid top ~600px (clock area) and bottom ~400px
+  // Dark minimalist design optimized for iPhone lock screen
   const padding = 60;
-  const startY = 650; // Start below clock
+  const startY = 650; // Start below clock area
   const headerHeight = 100;
   const cellSize = 16;
   const cellGap = 4;
   const rowHeight = 65;
   const habitNameWidth = 200;
   
-  // Generate minimalist dark SVG with proper font specification
-  let svg = `<?xml version="1.0" encoding="UTF-8"?>
-<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style type="text/css">
-      @font-face {
-        font-family: 'Arial';
-        src: local('Arial'), local('Helvetica'), local('sans-serif');
-      }
-      text {
-        font-family: Arial, Helvetica, sans-serif;
-      }
-    </style>
-  </defs>
-  
-  <!-- Dark background -->
-  <rect width="${width}" height="${height}" fill="#000000"/>
-  
-  <!-- Minimalist header (below clock safe zone) -->
-  <text x="${padding}" y="${startY}" font-size="40" font-weight="700" fill="#ffffff" letter-spacing="-1">Habits</text>
-  <text x="${padding}" y="${startY + 45}" font-size="18" font-weight="500" fill="#666666">${completionRate}% complete</text>
-  
-  <!-- Habits Grid -->
-  ${habitsData.map((habit, habitIndex) => {
-    const y = startY + headerHeight + habitIndex * rowHeight;
-    const completed = habit.statuses.filter(s => s.status === 'completed').length;
-    // Use hardcoded ASCII names to avoid font rendering issues
-    const habitName = HABIT_NAMES[habit.id] || 'Unknown';
-    
-    return `
-  <!-- Habit name -->
-  <text x="${padding}" y="${y + 24}" font-size="16" font-weight="500" fill="#ffffff">${habitName}</text>
-  
-  <!-- Days grid -->
-  ${habit.statuses.map((day, dayIndex) => {
-    const x = padding + habitNameWidth + dayIndex * (cellSize + cellGap);
-    let fill = '#1a1a1a';
-    let opacity = '1';
-    
-    if (day.status === 'completed') {
-      fill = '#ffffff';
-    } else if (day.status === 'in_progress') {
-      fill = '#666666';
-    }
-    
-    return `<rect x="${x}" y="${y + 10}" width="${cellSize}" height="${cellSize}" rx="5" fill="${fill}" opacity="${opacity}"/>`;
-  }).join('')}
-  
-  <!-- Completion count -->
-  <text x="${padding + habitNameWidth + daysToShow * (cellSize + cellGap) + 20}" y="${y + 24}" font-size="15" font-weight="500" fill="#666666">${completed}</text>
-    `;
-  }).join('')}
-  
-  <!-- Footer (above bottom safe zone) -->
-  <text x="${padding}" y="${height - 450}" font-size="14" font-weight="400" fill="#333333">Updated ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</text>
-  
-</svg>`;
-  
-  return Buffer.from(svg, 'utf-8');
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#000000',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+        fontFamily: 'Arial, sans-serif',
+      }}
+    >
+      {/* Header */}
+      <div
+        style={{
+          position: 'absolute',
+          left: `${padding}px`,
+          top: `${startY}px`,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '40px',
+            fontWeight: '700',
+            color: '#ffffff',
+            letterSpacing: '-1px',
+          }}
+        >
+          Habits
+        </div>
+        <div
+          style={{
+            fontSize: '18px',
+            fontWeight: '500',
+            color: '#666666',
+            marginTop: '10px',
+          }}
+        >
+          {completionRate}% complete
+        </div>
+      </div>
+
+      {/* Habits Grid */}
+      {habitsData.map((habit, habitIndex) => {
+        const y = startY + headerHeight + habitIndex * rowHeight;
+        const completed = habit.statuses.filter(s => s.status === 'completed').length;
+        const habitName = HABIT_NAMES[habit.id] || 'Unknown';
+
+        return (
+          <div
+            key={habit.id}
+            style={{
+              position: 'absolute',
+              left: `${padding}px`,
+              top: `${y}px`,
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            {/* Habit name */}
+            <div
+              style={{
+                width: `${habitNameWidth}px`,
+                fontSize: '16px',
+                fontWeight: '500',
+                color: '#ffffff',
+              }}
+            >
+              {habitName}
+            </div>
+
+            {/* Days grid */}
+            <div style={{ display: 'flex', gap: `${cellGap}px`, marginLeft: '0px' }}>
+              {habit.statuses.map((day, dayIndex) => {
+                let fill = '#1a1a1a';
+                
+                if (day.status === 'completed') {
+                  fill = '#ffffff';
+                } else if (day.status === 'in_progress') {
+                  fill = '#666666';
+                }
+
+                return (
+                  <div
+                    key={dayIndex}
+                    style={{
+                      width: `${cellSize}px`,
+                      height: `${cellSize}px`,
+                      borderRadius: '5px',
+                      backgroundColor: fill,
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Completion count */}
+            <div
+              style={{
+                marginLeft: '20px',
+                fontSize: '15px',
+                fontWeight: '500',
+                color: '#666666',
+              }}
+            >
+              {completed}
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Footer */}
+      <div
+        style={{
+          position: 'absolute',
+          left: `${padding}px`,
+          top: `${height - 450}px`,
+          fontSize: '14px',
+          fontWeight: '400',
+          color: '#333333',
+        }}
+      >
+        Updated {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+      </div>
+    </div>
+  );
 }
 
-module.exports = async (req, res) => {
+
+export default async function handler(req) {
   try {
-    const width = parseInt(req.query.width) || 1284;
-    const height = parseInt(req.query.height) || 2778;
-    const days = parseInt(req.query.days) || 30;
+    const { searchParams } = new URL(req.url);
+    const width = parseInt(searchParams.get('width')) || 1284;
+    const height = parseInt(searchParams.get('height')) || 2778;
+    const days = parseInt(searchParams.get('days')) || 30;
     
     const cachedHabitsData = await kv.get('habitsData');
     const cachedHabits = await kv.get('habits');
     
-    let allHabitsData = [];
-    
-    if (cachedHabitsData && cachedHabits) {
-      const habitsMap = {};
-      cachedHabits.data.forEach(habit => {
-        habitsMap[habit.id] = habit.name;
-      });
-      
-      const today = new Date();
-      const todayStr = today.toISOString().split('T')[0];
-      
-      for (const habitId of HABIT_IDS) {
-        const cachedHabit = cachedHabitsData.find(h => h.id === habitId);
-        let statuses = cachedHabit ? [...cachedHabit.statuses] : [];
-        statuses = statuses.filter(s => s.date !== todayStr);
-        
-        try {
-          const todayStatus = await getHabitStatus(habitId, today);
-          statuses.push(todayStatus);
-        } catch (error) {
-          console.error(`Failed today for ${habitId}`);
-        }
-        
-        statuses = statuses.slice(-days);
-        
-        allHabitsData.push({
-          id: habitId,
-          name: habitsMap[habitId] || 'Unknown',
-          statuses: statuses
-        });
-      }
-    } else {
-      return res.status(503).send('No cache available');
+    if (!cachedHabitsData || !cachedHabits) {
+      return new Response('No cache available', { status: 503 });
     }
     
-    const imageBuffer = generateWallpaperImage(allHabitsData, width, height);
+    const habitsMap = {};
+    cachedHabits.data.forEach(habit => {
+      habitsMap[habit.id] = habit.name;
+    });
     
-    // Convert SVG to PNG using sharp
-    const pngBuffer = await sharp(imageBuffer)
-      .png()
-      .toBuffer();
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
     
-    res.setHeader('Content-Type', 'image/png');
-    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).send(pngBuffer);
+    const allHabitsData = [];
+    
+    for (const habitId of HABIT_IDS) {
+      const cachedHabit = cachedHabitsData.find(h => h.id === habitId);
+      let statuses = cachedHabit ? [...cachedHabit.statuses] : [];
+      statuses = statuses.filter(s => s.date !== todayStr);
+      
+      try {
+        const todayStatus = await getHabitStatus(habitId, today);
+        statuses.push(todayStatus);
+      } catch (error) {
+        console.error(`Failed today for ${habitId}`);
+      }
+      
+      statuses = statuses.slice(-days);
+      
+      allHabitsData.push({
+        id: habitId,
+        name: habitsMap[habitId] || 'Unknown',
+        statuses: statuses
+      });
+    }
+    
+    return new ImageResponse(
+      <HabitWallpaper habitsData={allHabitsData} width={width} height={height} />,
+      {
+        width,
+        height,
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).send('Error generating wallpaper');
+    return new Response('Error generating wallpaper', { status: 500 });
   }
-};
+}
