@@ -11,5 +11,9 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/og": "^0.6.3",
     "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "typescript": "^5.9.3"
   }
 }
